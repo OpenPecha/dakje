@@ -5,7 +5,7 @@ Providing Tibetan spell checking service
 ### Requirement
 * [Poetry](https://python-poetry.org/) for Python package and environment management.
 
-### setup
+### Install dependencies
 By default, the dependencies are managed with [Poetry](https://python-poetry.org/), go there and install it.
 
 From `./backend/app/` you can install all the dependencies with:
@@ -14,7 +14,7 @@ From `./backend/app/` you can install all the dependencies with:
 $ poetry install
 ```
 
-Running server
+### Run
 ```console
 $ poetry run uvicorn app.main:app --reload
 ```
@@ -26,7 +26,19 @@ You can get path to virtual environment created by poetry for this project with 
 $ poetry env info --path
 ```
 
-## Frontend Requirements
+## Frontend
+### Requirements
 
 * Node.js (with `npm`).
+
+### Install dependencies
+```bash
+cd frontend
+npm install
+```
+
+### Run
+```bash
+npm run serve
+```
 
