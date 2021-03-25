@@ -8,6 +8,7 @@ authors = ["tenzin <ten13zin@gmail.com>"]
 python = "^3.8"
 fastapi = "^0.63.0"
 uvicorn = "^0.13.4"
+botok = "^0.8.1"
 
 [tool.poetry.dev-dependencies]
 

@@ -2,11 +2,19 @@
 <div class="container">
   <div class="sidepanel">
     <div class="title"> Tibetan Spellchecker</div>
-    <button class="btn-upload" @click="upload">Upload File</button>
+    <input class="btn-upload" type="file" ref="myFile" @change="upload">
   </div>
   <div class="content">
-    <textarea name="text" class="textarea">Here is the text</textarea>
-    <button @click="check">Check</button>
+    <div contenteditable="true" placeholder="Start by entering Tibetan text!" @paste ="onPaste" id="typearea" classname="typearea"></div>
+
+    <div v-if="loading">
+      Loading...
+    </div>
+    <div v-else>
+        <!-- request finished -->
+    </div>
+
+    <button class="check" @click="check">Check</button>
   </div>
   <div class="suggestion">
     <suggestion v-for="s in suggestions" :key=s :name=s />
@@ -16,84 +24,76 @@
 </template>
 
 <script>
-import Suggestion from "./components/Suggestion"
+import Suggestion from "./components/Suggestion";
+import './App.css';
+
 export default {
   name: 'App',
 
-components: {
-  Suggestion
-},
+  components: {
+    Suggestion
+  },
+  
   data() {
     return {
-      suggestions: [
-        {id: 1},
-        {id: 2},
-        {id: 3},
-      ]
+      suggestions:[
+        "N/A"
+      ],
+      sentence: "",
+      highlightedSentence: "",
+      loading: false,
     }
   },
 
   methods: {
-    upload() {
-      console.log("file uploading")
+    onPaste (evt) {
+      this.sentence = evt.clipboardData.getData('text');
     },
 
-    check() {
+    upload() {
+      console.log("file uploading");
+      let file = this.$refs.myFile.files[0];
+      if(!file || file.type !== 'text/plain') return;
+      
+      let reader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+      reader.onload =  evt => {
+        console.log(evt.target.result);
+        document.getElementById('typearea').innerHTML = evt.target.result;
+      }
+      reader.onerror = evt => {
+        console.error(evt);
+      }
+    },
+
+    async check() {
       console.log("check for correction")
-      this.suggestions.push({id: 4})
-    }
+      this.suggestions = [];
+      this.sentence = document.getElementById('typearea').textContent;
+
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept" },
+        body: JSON.stringify({ text: this.sentence})
+      };
+      this.loading = true;
+      const response = await fetch("http://localhost:8000/tokens", requestOptions);
+      const data = await response.json();
+      this.wordTokens = data;
+      this.loading = false;
+      this.highlightedSentence = "";
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].isWord == "true") {
+          this.highlightedSentence+=data[i].text;
+        }
+        else {
+          this.highlightedSentence += "<span style ='background-color: red'>" + data[i].text + "</span>";
+          this.suggestions.push(data[i].text);
+        }
+      }
+      document.getElementById('typearea').innerHTML = this.highlightedSentence;
+    },
   }
 }
 </script>
-
-<style>
-body {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #eeeeee
-}
-
-.container {
-  display: grid;
-  grid-template-columns: 18rem auto 18rem;
-  grid-template-rows: 100vh;
-  grid-template-areas: "sidepanel content suggestion";
-}
-
-.sidepanel {
-  grid-area: sidepanel;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 5rem;
-  background-color: #323439;
-}
-
-.title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #eeeeee
-}
-
-.btn-upload {
-  margin-top: 3rem;
-}
-
-
-.content {
-  grid-area: content;
-  margin-left: 1rem;
-}
-
-.textarea {
-  width: 100%;
-  height: 80%
-}
-
-.suggestion {
-  grid-area: suggestion;
-  margin-left: 1rem;
-}
-</style>

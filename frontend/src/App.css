@@ -1,0 +1,76 @@
+body {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #eeeeee
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 18rem auto 18rem;
+  grid-template-rows: 100vh;
+  grid-template-areas: "sidepanel content suggestion";
+}
+
+.sidepanel {
+  grid-area: sidepanel;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5rem;
+  background-color: #323439;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #eeeeee
+}
+
+.btn-upload {
+  margin-top: 3rem;
+}
+
+
+.content {
+  grid-area: content;
+  margin-left: 1rem;
+  background-color: #FFF;
+}
+
+.correctionarea {
+  width: 100%;
+  height: 40%;
+  background-color: #FFF;
+}
+
+.suggestion {
+  grid-area: suggestion;
+  margin-left: 1rem;
+}
+
+div.editable {
+  height: 500px;
+  border: 1px solid #ccc;
+}
+
+div#typearea {
+  padding: 10px;
+  font-size: 50px;
+}
+
+.check {
+  margin: 10px;
+}
+
+.btn-upload {
+  color: #FFF;
+}
+
+[contenteditable=true]:empty:before{
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block; /* For Firefox */
+  opacity: 20%;
+}
