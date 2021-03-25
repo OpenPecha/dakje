@@ -30,9 +30,10 @@ import './App.css';
 export default {
   name: 'App',
 
-components: {
-  Suggestion
-},
+  components: {
+    Suggestion
+  },
+  
   data() {
     return {
       suggestions:[
@@ -68,7 +69,7 @@ components: {
     async check() {
       console.log("check for correction")
       this.suggestions = [];
-      this.sentence = document.getElementById('typearea').innerHTML;
+      this.sentence = document.getElementById('typearea').textContent;
 
       const requestOptions = {
         method: "POST",
