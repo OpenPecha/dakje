@@ -1,3 +1,10 @@
+[contenteditable=true]:empty:before{
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block; /* For Firefox */
+  opacity: 20%;
+}
+
 body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -68,9 +75,3 @@ div#typearea {
   color: #FFF;
 }
 
-[contenteditable=true]:empty:before{
-  content: attr(placeholder);
-  pointer-events: none;
-  display: block; /* For Firefox */
-  opacity: 20%;
-}
