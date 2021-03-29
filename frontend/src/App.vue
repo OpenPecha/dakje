@@ -2,10 +2,10 @@
 <div class="container">
   <div class="sidepanel">
     <div class="title"> Tibetan Spellchecker</div>
-    <input class="btn-upload" type="file" ref="myFile" @change="upload">
+    <input class="btn-upload" type="file" ref="myFile" @change="upload" data-test="upload">
   </div>
   <div class="content">
-    <div contenteditable="true" placeholder="Start by entering Tibetan text!" @paste ="onPaste" id="typearea" classname="typearea"></div>
+    <div contenteditable="true" placeholder="Start by entering Tibetan text!" @paste ="onPaste" id="typearea" classname="typearea" data-test="typearea"></div>
 
     <div v-if="loading">
       Loading...
@@ -30,10 +30,9 @@ import './App.css';
 export default {
   name: 'App',
 
-  components: {
-    Suggestion
-  },
-  
+components: {
+  Suggestion
+},
   data() {
     return {
       suggestions:[
@@ -57,7 +56,7 @@ export default {
       
       let reader = new FileReader();
       reader.readAsText(file, "UTF-8");
-      reader.onload =  evt => {
+      reader.onload = evt => {
         console.log(evt.target.result);
         document.getElementById('typearea').innerHTML = evt.target.result;
       }
@@ -69,7 +68,7 @@ export default {
     async check() {
       console.log("check for correction")
       this.suggestions = [];
-      this.sentence = document.getElementById('typearea').textContent;
+      this.sentence = document.getElementById('typearea').innerHTML;
 
       const requestOptions = {
         method: "POST",
