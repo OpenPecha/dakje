@@ -6,9 +6,6 @@ on:
   pull_request:
     branches: [ $default-branch ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
 jobs:
   build:
 
@@ -16,10 +13,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Test frontend
+    - name: Install Node.js 10.x
       uses: actions/setup-node@v1
       with:
         node-version: '10.x'
+    - name: Test Frontend
     - run: |
         cd frontend
         npm ci
