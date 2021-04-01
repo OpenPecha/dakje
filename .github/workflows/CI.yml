@@ -22,7 +22,7 @@ jobs:
       run: |
         npm run build --if-present
         npm test
-        
+
   build-backend:
     runs-on: ubuntu-latest
     steps:
@@ -38,24 +38,3 @@ jobs:
         poetry install
     - name: Run Test
         poetry run pytest app/
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        sadf
