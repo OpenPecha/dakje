@@ -1,6 +1,8 @@
 # Tibetan Spellchecker
 Providing Tibetan spell checking service
 
+[![CI](https://github.com/10zinten/tibetan-spellchecker/actions/workflows/CI.yml/badge.svg)](https://github.com/10zinten/tibetan-spellchecker/actions/workflows/CI.yml)
+
 ## Backend
 ### Requirement
 * [Poetry](https://python-poetry.org/) for Python package and environment management.
