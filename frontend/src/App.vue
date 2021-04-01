@@ -14,9 +14,9 @@
         <!-- request finished -->
     </div>
 
-    <button class="check" @click="check">Check</button>
+    <button class="check" @click="check" data-test="check">Check</button>
   </div>
-  <div class="suggestion">
+  <div class="suggestion" data-test="suggestion">
     <suggestion v-for="s in suggestions" :key=s :name=s />
     <br>
   </div>
