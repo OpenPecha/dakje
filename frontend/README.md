@@ -22,7 +22,7 @@ npm run lint
 
 ### Jest and Unit Testing
 ```
-npm run test
+npm test
 ```
 
 ### Customize configuration
