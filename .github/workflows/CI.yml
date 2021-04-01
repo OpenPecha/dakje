@@ -20,6 +20,7 @@ jobs:
         npm ci
     - name: Run Test
       run: |
+        cd frontend
         npm run build --if-present
         npm test
 
@@ -37,4 +38,6 @@ jobs:
         cd backend/app
         poetry install
     - name: Run Test
-      run: poetry run pytest app/
+      run: |
+        cd backend/app
+        poetry run pytest app/
