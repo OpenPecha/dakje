@@ -37,4 +37,4 @@ jobs:
         cd backend/app
         poetry install
     - name: Run Test
-        poetry run pytest app/
+      run: poetry run pytest app/
