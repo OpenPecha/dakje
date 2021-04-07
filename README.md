@@ -1,5 +1,5 @@
 # Tibetan Spellchecker
-Providing Tibetan spell checking service
+Providing Tibetan spell checking service initiated by project [WikiLoop](https://meta.wikimedia.org/wiki/WikiLoop)
 
 [![CI](https://github.com/10zinten/tibetan-spellchecker/actions/workflows/CI.yml/badge.svg)](https://github.com/10zinten/tibetan-spellchecker/actions/workflows/CI.yml)
 
