@@ -3,6 +3,7 @@
   <div class="sidepanel">
     <div class="title"> Tibetan Spellchecker</div>
     <input class="btn-upload" type="file" ref="myFile" @change="upload" data-test="upload">
+    <download />
   </div>
   <div class="content">
     <div contenteditable="true" placeholder="Start by entering Tibetan text!" @paste ="onPaste" id="typearea" classname="typearea" data-test="typearea"></div>
@@ -25,13 +26,15 @@
 
 <script>
 import Suggestion from "./components/Suggestion";
+import Download from './components/Download.vue';
 import './App.css';
 
 export default {
   name: 'App',
 
 components: {
-  Suggestion
+  Suggestion,
+  Download,
 },
   data() {
     return {
@@ -66,7 +69,7 @@ components: {
     },
 
     async check() {
-      console.log("check for correction")
+      console.log("check for correction");
       this.suggestions = [];
       this.sentence = document.getElementById('typearea').innerHTML;
 
