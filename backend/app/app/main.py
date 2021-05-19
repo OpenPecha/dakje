@@ -1,55 +1,19 @@
-import botok
-from botok import WordTokenizer
-from botok.text.modify import *
-from typing import Optional
 from fastapi import FastAPI
-from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI()
+from .api import router
+from .config import settings
 
-origins = [
-    "http://localhost",
-    "http://localhost:8080",
-]
+app = FastAPI(
+    title=settings.PROJECT_NAME, openapi_url=f"{settings.API_STR}/openapi.json"
+)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=[str(origin) for origin in settings.BACKEND_CORS_ORIGINS],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-class textParams(BaseModel):
-    text: str
-
-@app.get("/")
-def read_root():
-    in_str = "ལེ གས། བཀྲ་ཤིས་མཐའི་ ༆ ཤི་བཀྲ་ཤིས་  tr བདེ་་ལེ གས། བཀྲ་ཤིས་བདེ་ལེགས་༡༢༣ཀཀ། མཐའི་རྒྱ་མཚོར་གནས་པའི་ཉས་ཆུ་འཐུང་།། །།མཁའ།" #testing
-    WT = WordTokenizer()
-    tokens = WT.tokenize(in_str)
-    return tokens
-
-
-@app.post("/tokens/")
-async def tokens(params: textParams):
-    WT = WordTokenizer()
-    tokens = WT.tokenize(params.text)
-
-    filtered = []
-    for token in tokens:
-        current = {}
-        if (is_mistake(token)):
-            current = {
-                "text": token.text,
-                "isWord": "false",
-            }
-        else:
-            current = {
-                "text": token.text,
-                "isWord": "true",
-            }
-        filtered.append(current)
-
-    return filtered
+app.include_router(router, prefix=settings.API_STR)
