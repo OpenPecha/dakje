@@ -3,8 +3,8 @@ import logging
 import re
 from pathlib import Path
 
-_re_word = re.compile("^\S+")
-_re_freq = re.compile("\d+$")
+_re_word = re.compile(r"^\S+")
+_re_freq = re.compile(r"\d+$")
 
 
 def parse_word(text):

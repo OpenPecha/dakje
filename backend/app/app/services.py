@@ -1,18 +1,19 @@
 from typing import Iterator, List
 
 from botok import Token, WordTokenizer
-from botok.text.modify import *
+from botok.text.modify import is_mistake
 from symspellpy import SymSpell, Verbosity
 
+from . import schemas
 from .config import settings
+
+WT = WordTokenizer()
 
 sym_spell = SymSpell()
 sym_spell.load_dictionary(settings.DICTIONARY_PATH, term_index=0, count_index=1)
-from . import schemas
 
 
 def tokenize(text) -> List[Token]:
-    WT = WordTokenizer()
     tokens = WT.tokenize(text)
     return tokens
 

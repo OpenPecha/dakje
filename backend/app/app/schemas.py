@@ -1,11 +1,14 @@
 from typing import List, Optional
 
 from pydantic import BaseModel
-from symspellpy.symspellpy import SuggestItem
 
 
 class Sentence(BaseModel):
     text: str
+
+
+class Word(BaseModel):
+    form: str
 
 
 class NoneWord(BaseModel):

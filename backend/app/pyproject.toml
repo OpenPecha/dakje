@@ -11,6 +11,7 @@ uvicorn = "^0.13.4"
 botok = "^0.8.1"
 symspellpy = "^6.7.0"
 python-dotenv = "^0.17.1"
+pre-commit = "^2.12.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"
