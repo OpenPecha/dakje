@@ -16,7 +16,12 @@ From `./backend/app/` you can install all the dependencies with:
 $ poetry install
 ```
 
-### Run
+setup pre-commit hooks
+```console
+$ pre-commit install
+```
+
+### Runing server
 ```console
 $ poetry run uvicorn app.main:app --reload
 ```
