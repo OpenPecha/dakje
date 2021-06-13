@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     "rest_framework",
     # local
     "dakje.users.apps.UsersConfig",
+    "dakje.spellcheck.apps.SpellcheckConfig",
 ]
 
 # AUTHENTICATION
@@ -166,3 +167,6 @@ TEMPLATES = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+DICTIONARY_PATH = env.str("DICTIONARY_PATH")

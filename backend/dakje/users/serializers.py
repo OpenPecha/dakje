@@ -11,8 +11,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ["url", "username", "email", "groups"]
 
         extra_kwargs = {
-            "url": {"view_name": "user-detail", "lookup_field": "username"},
-            "groups": {"view_name": "group-detail"},
+            "url": {"view_name": "api:user-detail", "lookup_field": "username"},
+            "groups": {"view_name": "api:group-detail"},
         }
 
 
@@ -21,4 +21,4 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ["url", "name"]
 
-        extra_kwargs = {"url": {"view_name": "group-detail"}}
+        extra_kwargs = {"url": {"view_name": "api:group-detail"}}
