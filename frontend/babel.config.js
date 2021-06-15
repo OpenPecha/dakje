@@ -1,3 +1,4 @@
+
 module.exports = {
   presets: [
     [
@@ -8,5 +9,6 @@ module.exports = {
         },
       },
     ],
+    '@quasar/babel-preset-app'
   ],
 };
