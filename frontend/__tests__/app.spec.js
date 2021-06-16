@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime'
 import { mount } from '@vue/test-utils'
-import App from './../src/App.vue'
+import App from '../src/App.vue'
 
 /*
 Pasting text
@@ -74,3 +74,12 @@ test('suggestions not empty', async () => {
   //suggestions initially is empty until text is spell-checked
   expect(suggestions.exists())
 })
+
+/*
+Done with Tests
+*/
+afterAll(async done => {
+  console.log("done")
+  // Closing the DB connection allows Jest to exit successfully.
+  done();
+});

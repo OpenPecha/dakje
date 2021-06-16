@@ -27,6 +27,7 @@
 <script>
 import Suggestion from "./components/Suggestion";
 import Download from './components/Download.vue';
+import * as fetch from 'node-fetch';
 //import './css/app.css';
 
 export default {
@@ -71,7 +72,8 @@ components: {
     async check() {
       //console.log("check for correction");
       this.suggestions = [];
-      this.sentence = document.getElementById('typearea').innerHTML;
+      var typearea = document.getElementById('typearea');
+      this.sentence = typearea ? typearea.innerHTML : "";
 
       const requestOptions = {
         method: "POST",
