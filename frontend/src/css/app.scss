@@ -1,3 +1,4 @@
+// app global css in SCSS form
 [contenteditable=true]:empty:before{
   content: attr(placeholder);
   pointer-events: none;

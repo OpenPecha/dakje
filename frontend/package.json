@@ -1,71 +1,62 @@
 {
   "name": "frontend",
-  "version": "0.1.0",
+  "version": "0.0.1",
+  "description": "A Quasar Framework app",
+  "productName": "Tibetan SpellChecker",
+  "author": "Anan <mengan.wang@gmail.com>",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test": "jest"
+    "lint": "eslint --ext .js,.vue ./",
+    "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
+    "test:unit": "jest --updateSnapshot",
+    "test:unit:ci": "jest --ci",
+    "test:unit:coverage": "jest --coverage",
+    "test:unit:watch": "jest --watch",
+    "test:unit:watchAll": "jest --watchAll",
+    "serve:test:coverage": "quasar serve test/jest/coverage/lcov-report/ --port 8788",
+    "concurrently:dev:jest": "concurrently \"quasar dev\" \"jest --watch\""
   },
   "dependencies": {
+    "@quasar/extras": "^1.0.0",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "docx": "^6.0.3",
     "file-saver": "^2.0.5",
     "jest": "^26.6.3",
-    "jest-serializer-vue": "^2.0.2",
-    "jest-vue-preprocessor": "^1.7.1",
-    "vue": "^3.0.0",
-    "vue-jest": "^5.0.0-0"
+    "quasar": "^2.0.0-beta.1",
+    "vue": "^3.0.11",
+    "vue-jest": "^5.0.0-alpha.10"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.13.14",
     "@babel/preset-env": "^7.13.12",
+    "@quasar/app": "^3.0.0-beta.1",
+    "@quasar/quasar-app-extension-testing-unit-jest": "^2.2.2",
     "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/test-utils": "^2.0.0-0",
-    "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-jest": "^24.1.0",
+    "eslint-plugin-vue": "^7.0.0",
+    "eslint-webpack-plugin": "^2.4.0"
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
   ],
-  "jest": {
-    "moduleNameMapper": {
-      "@/([^\\.]*).vue$": "<rootDir>/src/$1.vue",
-      "@/([^\\.]*)$": "<rootDir>/src/$1.js",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
-    },
-    "moduleFileExtensions": [
-      "js",
-      "vue"
-    ],
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.vue$": "vue-jest"
-    },
-    "snapshotSerializers": [
-      "jest-serializer-vue"
-    ]
+  "engines": {
+    "node": ">= 12.22.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
   }
 }

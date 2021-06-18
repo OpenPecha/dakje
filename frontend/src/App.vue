@@ -27,7 +27,6 @@
 <script>
 import Suggestion from "./components/Suggestion";
 import Download from './components/Download.vue';
-import './App.css';
 
 export default {
   name: 'App',
