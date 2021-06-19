@@ -4,6 +4,9 @@ Build an online editor with spellchecking feature for Tibetan language similar t
 
 ## Features todo list
 - Any of the [grammarly](https://app.grammarly.com/) features
+  - [ ] simple WYSIWYG edtior
+  - [ ] Highlight incorrect spelling
+  - [ ] List all the suggestions
 - Check for case particle agreements and mark them as potential mistakes
 
 ## About Student Proposal
