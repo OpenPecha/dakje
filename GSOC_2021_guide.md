@@ -3,7 +3,7 @@ Build an online editor with spellchecking feature for Tibetan language similar t
 
 
 ## Features todo list
-- Any of the [grammarly](https://app.grammarly.com/) features
+- Any of the [grammarly](https://app.grammarly.com/) features or [haming](https://hemingwayapp.com/)
   - [ ] simple WYSIWYG edtior
   - [ ] Highlight incorrect spelling
   - [ ] List all the suggestions
