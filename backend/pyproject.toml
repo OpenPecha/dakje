@@ -1,19 +1,18 @@
 [tool.poetry]
-name = "app"
+name = "dakje"
 version = "0.1.0"
 description = ""
 authors = ["tenzin <ten13zin@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-fastapi = "^0.63.0"
-uvicorn = "^0.13.4"
-botok = "^0.8.1"
-symspellpy = "^6.7.0"
-python-dotenv = "^0.17.1"
-pre-commit = "^2.12.1"
+Django = "^3.2.4"
+django-environ = "^0.4.5"
+djangorestframework = "^3.12.4"
+bospell = "^0.0.3"
 
 [tool.poetry.dev-dependencies]
+pre-commit = "^2.12.1"
 pytest = "^6.2.2"
 black = "^21.5b1"
 
