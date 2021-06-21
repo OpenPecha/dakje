@@ -1,6 +1,6 @@
-import 'regenerator-runtime/runtime'
+//import 'regenerator-runtime/runtime'
 import { mount } from '@vue/test-utils'
-import App from './../src/App.vue'
+import App from './../App.vue'
 
 /*
 Pasting text
@@ -13,6 +13,7 @@ test('updates text area', async () => {
   typearea.element.innerHTML = pasteContents
   expect(wrapper.text()).toContain(pasteContents)
 })
+
 
 /*
 Uploading a txt file
