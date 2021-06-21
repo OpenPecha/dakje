@@ -23,10 +23,10 @@ $ pre-commit install
 
 ### Runing server
 ```console
-$ poetry run uvicorn app.main:app --reload
+$ poetry run python manage.py runserver
 ```
 
-Note: If your using editor, open your editor at `./backend/app/` (instead of the project root: `./`), so that you see an `./app/` directory with your code inside. That way, your editor will be able to find all the imports, etc. Make sure your editor uses the environment you just created with Poetry.
+Note: If your using editor, open your editor at `./backend` (instead of the project root: `./`). Make sure your editor uses the environment you just created with Poetry.
 
 You can get path to virtual environment created by poetry for this project with command.
 ```console
