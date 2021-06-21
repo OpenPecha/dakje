@@ -1,6 +1,5 @@
+from bospell.text import Text
 from rest_framework import serializers
-
-from . import Text
 
 
 class SpanSerializer(serializers.Serializer):

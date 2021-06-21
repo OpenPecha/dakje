@@ -61,8 +61,20 @@ d = ["aiohttp (>=3.6.0)", "aiohttp-cors"]
 python2 = ["typed-ast (>=1.4.2)"]
 
 [[package]]
+name = "bospell"
+version = "0.0.3"
+description = "Spell checking toolkit for Tibetan (boyig)"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.dependencies]
+botok = ">=0.8.6,<1.0"
+symspellpy = ">=6.7.0,<7.0"
+
+[[package]]
 name = "botok"
-version = "0.8.1"
+version = "0.8.6"
 description = "Tibetan Word Tokenizer"
 category = "main"
 optional = false
@@ -409,7 +421,7 @@ testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "e9625cb996201921c92394d3a6d3d0cb7ccd922e9d3a1084ac35dd9dc45c35c3"
+content-hash = "055ec2fd7e48585567b649cd7fd15433710fdcc51e75ed91cebc0761e71bfa85"
 
 [metadata.files]
 appdirs = [
@@ -432,9 +444,13 @@ black = [
     {file = "black-21.5b1-py3-none-any.whl", hash = "sha256:8a60071a0043876a4ae96e6c69bd3a127dad2c1ca7c8083573eb82f92705d008"},
     {file = "black-21.5b1.tar.gz", hash = "sha256:23695358dbcb3deafe7f0a3ad89feee5999a46be5fec21f4f1d108be0bcdb3b1"},
 ]
+bospell = [
+    {file = "bospell-0.0.3-py3-none-any.whl", hash = "sha256:e49d15ca9d4ae5bf09f419afe0eee59b7ae110aaa9153de298c71dc8844c2f93"},
+    {file = "bospell-0.0.3.tar.gz", hash = "sha256:602fe3c1f9a26a4f36784b1ff95c9f273c84d290e039100ee306474a83be9a9c"},
+]
 botok = [
-    {file = "botok-0.8.1-py3-none-any.whl", hash = "sha256:1cd6a1d1b963725ec314a3b417b70d107775fbc585d219b8089c43df4a8bddcb"},
-    {file = "botok-0.8.1.tar.gz", hash = "sha256:40243eeb00c4cda00def6483a130ebfb50cf08271cef643bda86dae4ec897e8e"},
+    {file = "botok-0.8.6-py3-none-any.whl", hash = "sha256:3afe1455a1a9e0160e41fec33d074f0642c85307e0a11c7f1389a9c40ee755de"},
+    {file = "botok-0.8.6.tar.gz", hash = "sha256:151219f6049de8f05a8c0b2304ac2c606a38d8b60bb0dd3e75fed8a763b220e3"},
 ]
 certifi = [
     {file = "certifi-2020.12.5-py2.py3-none-any.whl", hash = "sha256:719a74fb9e33b9bd44cc7f3a8d94bc35e4049deebe19ba7d8e108280cfd59830"},
