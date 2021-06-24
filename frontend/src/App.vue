@@ -6,8 +6,11 @@
     <download />
   </div>
   <div class="content">
-    <div contenteditable="true" placeholder="Start by entering Tibetan text!" @paste ="onPaste" id="typearea" classname="typearea" data-test="typearea"></div>
+    <text-editor @paste ="onPaste" id="typearea" classname="typearea" data-test="typearea"/>
 
+
+    <!--<div contenteditable="true" placeholder="Start by entering Tibetan text!" @paste ="onPaste" id="typearea" classname="typearea" data-test="typearea"></div>
+    -->
     <div v-if="loading">
       Loading...
     </div>
@@ -27,6 +30,8 @@
 <script>
 import Suggestion from "./components/Suggestion";
 import Download from './components/Download.vue';
+import TextEditor from './components/TextEditor.vue';
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -34,6 +39,7 @@ export default {
 components: {
   Suggestion,
   Download,
+  TextEditor,
 },
   data() {
     return {
@@ -55,7 +61,7 @@ components: {
       console.log("file uploading");
       let file = this.$refs.myFile.files[0];
       if(!file || file.type !== 'text/plain') return;
-      
+
       let reader = new FileReader();
       reader.readAsText(file, "UTF-8");
       reader.onload = evt => {
@@ -72,6 +78,14 @@ components: {
       this.suggestions = [];
       this.sentence = document.getElementById('typearea').innerHTML;
 
+      // axios.post('http://localhost:8000/api/spellcheck', {"content": "your text"}).then(
+      //   response => {
+      //     this.sentence = response.data;
+      //     console.log("poop")
+      //     document.getElementById('typearea').innerHTML = this.sentence;
+      //   }
+      // )
+
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
@@ -79,7 +93,7 @@ components: {
         body: JSON.stringify({ text: this.sentence})
       };
       this.loading = true;
-      const response = await fetch("http://localhost:8000/tokens", requestOptions);
+      const response = await fetch("http://localhost:8000/api/spellcheck", requestOptions);
       const data = await response.json();
       this.wordTokens = data;
       this.loading = false;

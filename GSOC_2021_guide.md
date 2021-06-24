@@ -4,7 +4,7 @@ Build an online editor with spellchecking feature for Tibetan language similar t
 
 ## Features todo list
 - Any of the [grammarly](https://app.grammarly.com/) features or [haming](https://hemingwayapp.com/)
-  - [ ] simple WYSIWYG edtior
+  - [ ] simple WYSIWYG editor
   - [ ] Highlight incorrect spelling
   - [ ] List all the suggestions
 - Check for case particle agreements and mark them as potential mistakes
@@ -21,9 +21,9 @@ Note: You don't need to know Tibetan
 
 ### Backend
 - python
-- [fasapi](https://github.com/tiangolo/fastapi) RESTful API.
+- [Django](https://www.djangoproject.com/)
 - [Pandoc](https://pandoc.org/) (optional)
 
 ### Frontend
 - [vuejs](https://vuejs.org/)
-- [axios](https://github.com/axios/axios) (optional)
+- [axios](https://github.com/axios/axios)
