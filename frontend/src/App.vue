@@ -6,11 +6,11 @@
     <download />
   </div>
   <div class="content">
-    <text-editor @paste ="onPaste" id="typearea" classname="typearea" data-test="typearea"/>
+    <!-- <text-editor @paste ="onPaste" id="typearea" classname="typearea" data-test="typearea"/> -->
 
 
-    <!--<div contenteditable="true" placeholder="Start by entering Tibetan text!" @paste ="onPaste" id="typearea" classname="typearea" data-test="typearea"></div>
-    -->
+    <div contenteditable="true" placeholder="Start by entering Tibetan text!" @paste ="onPaste" id="typearea" classname="typearea" data-test="typearea"></div>
+
     <div v-if="loading">
       Loading...
     </div>
@@ -30,7 +30,7 @@
 <script>
 import Suggestion from "./components/Suggestion";
 import Download from './components/Download.vue';
-import TextEditor from './components/TextEditor.vue';
+// import TextEditor from './components/TextEditor.vue';
 import axios from 'axios';
 
 export default {
@@ -39,7 +39,7 @@ export default {
 components: {
   Suggestion,
   Download,
-  TextEditor,
+  // TextEditor,
 },
   data() {
     return {
@@ -86,25 +86,36 @@ components: {
       //   }
       // )
 
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept" },
-        body: JSON.stringify({ text: this.sentence})
-      };
-      this.loading = true;
-      const response = await fetch("http://localhost:8000/api/spellcheck", requestOptions);
-      const data = await response.json();
+      // const requestOptions = {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
+      //   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept" },
+      //   body: JSON.stringify({ text: this.sentence})
+      // };
+      // this.loading = true;
+      // const response = await fetch("http://localhost:8000/api/spellcheck", requestOptions);
+      // const data = await response.json();
+
+      const data = {
+        "text": "text containng spelling mistakes",
+        "tokens": ["text", "containng", "speling", "mistakes"],
+        "suggestions":
+          {
+                "1": {"candidates": ["containing"]},
+                "2": {"candidates": ["spelling"]}
+            }
+      }
+
       this.wordTokens = data;
       this.loading = false;
       this.highlightedSentence = "";
-      for (var i = 0; i < data.length; i++) {
-        if (data[i].isWord == "true") {
-          this.highlightedSentence+=data[i].text;
+      for (var i = 0; i < data.tokens.length; i++) {
+        if (!data.suggestions.hasOwnProperty(i)) {
+          this.highlightedSentence+=data.tokens[i] + " ";
         }
         else {
-          this.highlightedSentence += "<span style ='background-color: red'>" + data[i].text + "</span>";
-          this.suggestions.push(data[i].text);
+          this.highlightedSentence += "<span style ='background-color: red'>" + data.tokens[i] + "</span> ";
+          this.suggestions.push(data.suggestions[i].candidates);
         }
       }
       document.getElementById('typearea').innerHTML = this.highlightedSentence;
