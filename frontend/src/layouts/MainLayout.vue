@@ -1,119 +1,125 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+<div class="container">
+  <div class="sidepanel">
+    <div class="title"> Tibetan Spellchecker</div>
+    <input class="btn-upload" type="file" ref="myFile" @change="upload" data-test="upload">
+    <download />
+  </div>
+  <div class="content">
+    <text-editor @paste ="onPaste" id="typearea" classname="typearea" data-test="typearea"/>
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
-    </q-header>
+    <!-- <div contenteditable="true" placeholder="Start by entering Tibetan text!" @paste ="onPaste" id="typearea" classname="typearea" data-test="typearea"></div> -->
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      class="bg-grey-1"
-    >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Essential Links
-        </q-item-label>
+    <div v-if="loading">
+      Loading...
+    </div>
+    <div v-else>
+        <!-- request finished -->
+    </div>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
-
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout>
+    <button class="check" @click="check" data-test="check">Check</button>
+  </div>
+  <div class="suggestion" data-test="suggestion">
+    <suggestion v-for="s in suggestions" :key=s :name=s />
+    <br>
+  </div>
+</div>
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
+import Suggestion from "../components/Suggestion";
+import Download from '../components/Download.vue';
+import TextEditor from '../components/TextEditor.vue';
+import axios from 'axios';
 
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-];
+export default {
+  name: 'App',
 
-import { defineComponent, ref } from 'vue'
-
-export default defineComponent({
-  name: 'MainLayout',
-
-  components: {
-    EssentialLink
-  },
-
-  setup () {
-    const leftDrawerOpen = ref(false)
-
+components: {
+  Suggestion,
+  Download,
+  // TextEditor,
+},
+  data() {
     return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      suggestions:[
+        "N/A"
+      ],
+      sentence: "",
+      highlightedSentence: "",
+      loading: false,
     }
+  },
+
+  methods: {
+    onPaste (evt) {
+      this.sentence = evt.clipboardData.getData('text');
+    },
+
+    upload() {
+      console.log("file uploading");
+      let file = this.$refs.myFile.files[0];
+      if(!file || file.type !== 'text/plain') return;
+
+      let reader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+      reader.onload = evt => {
+        console.log(evt.target.result);
+        document.getElementById('typearea').innerHTML = evt.target.result;
+      }
+      reader.onerror = evt => {
+        console.error(evt);
+      }
+    },
+
+    async check() {
+      console.log("check for correction");
+      this.suggestions = [];
+      this.sentence = document.getElementById('typearea').innerHTML;
+
+      // axios.post('http://localhost:8000/api/spellcheck', {"content": "your text"}).then(
+      //   response => {
+      //     this.sentence = response.data;
+      //     console.log("poop")
+      //     document.getElementById('typearea').innerHTML = this.sentence;
+      //   }
+      // )
+
+      // const requestOptions = {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
+      //   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept" },
+      //   body: JSON.stringify({ text: this.sentence})
+      // };
+      // this.loading = true;
+      // const response = await fetch("http://localhost:8000/api/spellcheck", requestOptions);
+      // const data = await response.json();
+
+      const data = {
+        "text": "text containng spelling mistakes",
+        "tokens": ["text", "containng", "speling", "mistakes"],
+        "suggestions":
+          {
+                "1": {"candidates": ["containing"]},
+                "2": {"candidates": ["spelling"]}
+            }
+      }
+
+      this.wordTokens = data;
+      this.loading = false;
+      this.highlightedSentence = "";
+      for (var i = 0; i < data.tokens.length; i++) {
+        if (!data.suggestions.hasOwnProperty(i)) {
+          this.highlightedSentence+=data.tokens[i] + " ";
+        }
+        else {
+          this.highlightedSentence += "<span style ='background-color: red'>" + data.tokens[i] + "</span> ";
+          this.suggestions.push(data.suggestions[i].candidates);
+        }
+      }
+      document.getElementById('typearea').innerHTML = this.highlightedSentence;
+    },
   }
-})
+}
 </script>
