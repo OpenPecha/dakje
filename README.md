@@ -10,7 +10,7 @@ Providing Tibetan spell checking service initiated by project [WikiLoop](https:/
 ### Install dependencies
 By default, the dependencies are managed with [Poetry](https://python-poetry.org/), go there and install it.
 
-From `./backend/app/` you can install all the dependencies with:
+From `./backend/` you can install all the dependencies with:
 
 ```console
 $ poetry install
@@ -46,6 +46,5 @@ npm install
 
 ### Run
 ```bash
-npm run serve
+npx quasar dev
 ```
-

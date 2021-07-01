@@ -1,13 +1,13 @@
 //import 'regenerator-runtime/runtime'
 import { mount } from '@vue/test-utils'
-import App from './../App.vue'
+import App from './../layouts/MainLayout.vue'
 
 /*
 Pasting text
 */
 test('updates text area', async () => {
   const wrapper = mount(App)
-  
+
   const pasteContents = 'test copy paste'
   const typearea = wrapper.get('[data-test="typearea"]')
   typearea.element.innerHTML = pasteContents
@@ -20,7 +20,7 @@ Uploading a txt file
 */
 test('updates contenteditable', async () => {
   const wrapper = mount(App)
-  
+
   const fileContents = 'file contents'
   const file = new Blob([fileContents], { type: "text/plain", name: "sample.txt"})
 
@@ -37,7 +37,7 @@ Check Button pressed
 */
 test('calls check when check button pressed', async () => {
   const wrapper = mount(App)
-  
+
   const checkButton = wrapper.get('[data-test="check"]')
 
   await checkButton.trigger('click')
@@ -49,7 +49,7 @@ Showcase errors in Red
 */
 test('detecting html tags in typearea', async () => {
   const wrapper = mount(App)
-  
+
   const sampleText = "ཐོག་མར་དཀོན་མཆོག་གིས་འཇིག་རྟེན་ཁམས་དང་དེར་ཡོད་པ་ཐམས་ཅད་གར་དུ་བཀོད་གནང་བ་རེད"
   const typearea = wrapper.get('[data-test="typearea"]')
   typearea.element.innerHTML = sampleText
@@ -66,7 +66,7 @@ Display suggestions of errors
 */
 test('suggestions not empty', async () => {
   const wrapper = mount(App)
-  
+
   const checkButton = wrapper.get('[data-test="check"]')
   await checkButton.trigger('click')
 
