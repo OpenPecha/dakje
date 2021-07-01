@@ -6,10 +6,7 @@
     <download />
   </div>
   <div class="content">
-    <text-editor @paste ="onPaste" id="typearea" classname="typearea" data-test="typearea"/>
-
-
-    <!-- <div contenteditable="true" placeholder="Start by entering Tibetan text!" @paste ="onPaste" id="typearea" classname="typearea" data-test="typearea"></div> -->
+    <text-editor @paste="onPaste" id="typearea" classname="typearea" data-test="typearea"/>
 
     <div v-if="loading">
       Loading...
@@ -31,7 +28,6 @@
 import Suggestion from "../components/Suggestion";
 import Download from '../components/Download.vue';
 import TextEditor from '../components/TextEditor.vue';
-import axios from 'axios';
 
 export default {
   name: 'App',
@@ -39,7 +35,7 @@ export default {
 components: {
   Suggestion,
   Download,
-  // TextEditor,
+  TextEditor,
 },
   data() {
     return {
@@ -78,33 +74,25 @@ components: {
       this.suggestions = [];
       this.sentence = document.getElementById('typearea').innerHTML;
 
-      // axios.post('http://localhost:8000/api/spellcheck', {"content": "your text"}).then(
-      //   response => {
-      //     this.sentence = response.data;
-      //     console.log("poop")
-      //     document.getElementById('typearea').innerHTML = this.sentence;
-      //   }
-      // )
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept" },
+        body: JSON.stringify({ text: this.sentence})
+      };
+      this.loading = true;
+      const response = await fetch("http://localhost:8000/api/spellcheck", requestOptions);
+      const data = await response.json();
 
-      // const requestOptions = {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
-      //   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept" },
-      //   body: JSON.stringify({ text: this.sentence})
-      // };
-      // this.loading = true;
-      // const response = await fetch("http://localhost:8000/api/spellcheck", requestOptions);
-      // const data = await response.json();
-
-      const data = {
-        "text": "text containng spelling mistakes",
-        "tokens": ["text", "containng", "speling", "mistakes"],
-        "suggestions":
-          {
-                "1": {"candidates": ["containing"]},
-                "2": {"candidates": ["spelling"]}
-            }
-      }
+      // const data = {
+      //   "text": "text containng spelling mistakes",
+      //   "tokens": ["text", "containng", "speling", "mistakes"],
+      //   "suggestions":
+      //     {
+      //           "1": {"candidates": ["containing"]},
+      //           "2": {"candidates": ["spelling"]}
+      //       }
+      // }
 
       this.wordTokens = data;
       this.loading = false;
