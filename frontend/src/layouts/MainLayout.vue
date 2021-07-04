@@ -18,7 +18,7 @@
     <button class="check" @click="check" data-test="check">Check</button>
   </div>
   <div class="suggestion" data-test="suggestion">
-    <suggestion v-for="s in suggestions" :key=s :name=s />
+    <suggestion @click="acceptSuggestion(s, index+1)" v-for="(s, index) in suggestions" :key=s :name=s />
     <br>
   </div>
 </div>
@@ -45,6 +45,7 @@ components: {
       sentence: "",
       highlightedSentence: "",
       loading: false,
+      data: [],
     }
   },
 
@@ -69,30 +70,52 @@ components: {
       }
     },
 
+    async acceptSuggestion(correction, index) {
+      // console.log(this.data.tokens);
+      console.log(index + "index");
+      this.highlightedSentence = "";
+      this.suggestions=[];
+      for (var i = 0; i < this.data.tokens.length; i++) {
+        console.log(i);
+        if (i == index){
+          console.log("here");
+          console.log(correction);
+          this.highlightedSentence += correction[0] + " ";
+        } else if (!this.data.suggestions.hasOwnProperty(i)) {
+          this.highlightedSentence+=this.data.tokens[i] + " ";
+        } else {
+          this.highlightedSentence += "<span style ='background-color: red'>" + this.data.tokens[i] + "</span> ";
+          this.suggestions.push(this.data.suggestions[i].candidates);
+        }
+      }
+      document.getElementById('typearea').innerHTML = this.highlightedSentence;
+    },
+
     async check() {
       console.log("check for correction");
       this.suggestions = [];
       this.sentence = document.getElementById('typearea').innerHTML;
 
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept" },
-        body: JSON.stringify({ text: this.sentence})
-      };
-      this.loading = true;
-      const response = await fetch("http://localhost:8000/api/spellcheck", requestOptions);
-      const data = await response.json();
+      // const requestOptions = {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
+      //   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept" },
+      //   body: JSON.stringify({ text: this.sentence})
+      // };
+      // this.loading = true;
+      // const response = await fetch("http://localhost:8000/api/spellcheck", requestOptions);
+      // const data = await response.json();
 
-      // const data = {
-      //   "text": "text containng spelling mistakes",
-      //   "tokens": ["text", "containng", "speling", "mistakes"],
-      //   "suggestions":
-      //     {
-      //           "1": {"candidates": ["containing"]},
-      //           "2": {"candidates": ["spelling"]}
-      //       }
-      // }
+      const data = {
+        "text": "text containng spelling mistakes",
+        "tokens": ["text", "containng", "speling", "mistakes"],
+        "suggestions":
+          {
+                "1": {"candidates": ["containing"]},
+                "2": {"candidates": ["spelling"]}
+            }
+      }
+      this.data = data;
 
       this.wordTokens = data;
       this.loading = false;

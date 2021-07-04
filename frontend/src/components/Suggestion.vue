@@ -1,6 +1,10 @@
 <template>
-<div class="suggestion">
-    Suggestion {{ name }}
+<div>
+    <q-btn />
+    <div class="suggestion">
+
+        Suggestion {{ name }}
+    </div>
 </div>
 </template>
 
