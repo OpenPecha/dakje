@@ -18,7 +18,7 @@
     <button class="check" @click="check" data-test="check">Check</button>
   </div>
   <div class="suggestion" data-test="suggestion">
-    <suggestion v-for="s in suggestions" :key=s :name=s />
+    <suggestion @selectCorrection="acceptSuggestion" v-for="s in suggestions" v-bind:candidates="s" :key=s :id="s[1]" :name="this.data.tokens[s[1]]" />
     <br>
   </div>
 </div>
@@ -39,12 +39,11 @@ components: {
 },
   data() {
     return {
-      suggestions:[
-        "N/A"
-      ],
+      suggestions:[],
       sentence: "",
       highlightedSentence: "",
       loading: false,
+      data: [],
     }
   },
 
@@ -69,32 +68,56 @@ components: {
       }
     },
 
+    async acceptSuggestion(correction) {
+      console.log(correction)
+
+      //correction[0]: index of suggestion
+      //correction[1]: index of candidate
+
+      this.highlightedSentence = "";
+      this.suggestions=[];
+
+      for (var i = 0; i < this.data.tokens.length; i++) {
+        if (i == correction[0]){
+          this.highlightedSentence += this.data.suggestions[i].candidates[correction[1]] + " ";
+          this.data.tokens[i] = this.data.suggestions[i].candidates[correction[1]];
+          delete this.data.suggestions[i];
+        } else if (!this.data.suggestions.hasOwnProperty(i)) {
+          this.highlightedSentence+=this.data.tokens[i] + " ";
+        } else {
+          this.highlightedSentence += "<span style ='background-color: red'>" + this.data.tokens[i] + "</span> ";
+          this.suggestions.push([this.data.suggestions[i].candidates,i]);
+        }
+      }
+      document.getElementById('typearea').innerHTML = this.highlightedSentence;
+    },
+
     async check() {
       console.log("check for correction");
       this.suggestions = [];
       this.sentence = document.getElementById('typearea').innerHTML;
 
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept" },
-        body: JSON.stringify({ text: this.sentence})
-      };
-      this.loading = true;
-      const response = await fetch("http://localhost:8000/api/spellcheck", requestOptions);
-      const data = await response.json();
+      // const requestOptions = {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
+      //   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept" },
+      //   body: JSON.stringify({ text: this.sentence})
+      // };
+      // this.loading = true;
+      // const response = await fetch("http://localhost:8000/api/spellcheck", requestOptions);
+      // const data = await response.json();
 
-      // const data = {
-      //   "text": "text containng spelling mistakes",
-      //   "tokens": ["text", "containng", "speling", "mistakes"],
-      //   "suggestions":
-      //     {
-      //           "1": {"candidates": ["containing"]},
-      //           "2": {"candidates": ["spelling"]}
-      //       }
-      // }
+      const data = {
+        "text": "text containng spelling mistakes",
+        "tokens": ["text", "containng", "speling", "mistakes"],
+        "suggestions":
+          {
+                "1": {"candidates": ["containing"]},
+                "2": {"candidates": ["spelling", "spellling"]}
+            }
+      }
 
-      this.wordTokens = data;
+      this.data = data;
       this.loading = false;
       this.highlightedSentence = "";
       for (var i = 0; i < data.tokens.length; i++) {
@@ -103,7 +126,7 @@ components: {
         }
         else {
           this.highlightedSentence += "<span style ='background-color: red'>" + data.tokens[i] + "</span> ";
-          this.suggestions.push(data.suggestions[i].candidates);
+          this.suggestions.push([data.suggestions[i].candidates,i]);
         }
       }
       document.getElementById('typearea').innerHTML = this.highlightedSentence;
