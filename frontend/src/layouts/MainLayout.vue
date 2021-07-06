@@ -18,7 +18,7 @@
     <button class="check" @click="check" data-test="check">Check</button>
   </div>
   <div class="suggestion" data-test="suggestion">
-    <suggestion @click="acceptSuggestion(s, index+1)" v-for="(s, index) in suggestions" :key=s :name=s />
+    <suggestion @selectCorrection="acceptSuggestion" v-for="s in suggestions" v-bind:candidates="s" :key=s :id="s[1]" :name="this.data.tokens[s[1]]" />
     <br>
   </div>
 </div>
@@ -39,9 +39,7 @@ components: {
 },
   data() {
     return {
-      suggestions:[
-        "N/A"
-      ],
+      suggestions:[],
       sentence: "",
       highlightedSentence: "",
       loading: false,
@@ -70,22 +68,25 @@ components: {
       }
     },
 
-    async acceptSuggestion(correction, index) {
-      // console.log(this.data.tokens);
-      console.log(index + "index");
+    async acceptSuggestion(correction) {
+      console.log(correction)
+
+      //correction[0]: index of suggestion
+      //correction[1]: index of candidate
+
       this.highlightedSentence = "";
       this.suggestions=[];
+
       for (var i = 0; i < this.data.tokens.length; i++) {
-        console.log(i);
-        if (i == index){
-          console.log("here");
-          console.log(correction);
-          this.highlightedSentence += correction[0] + " ";
+        if (i == correction[0]){
+          this.highlightedSentence += this.data.suggestions[i].candidates[correction[1]] + " ";
+          this.data.tokens[i] = this.data.suggestions[i].candidates[correction[1]];
+          delete this.data.suggestions[i];
         } else if (!this.data.suggestions.hasOwnProperty(i)) {
           this.highlightedSentence+=this.data.tokens[i] + " ";
         } else {
           this.highlightedSentence += "<span style ='background-color: red'>" + this.data.tokens[i] + "</span> ";
-          this.suggestions.push(this.data.suggestions[i].candidates);
+          this.suggestions.push([this.data.suggestions[i].candidates,i]);
         }
       }
       document.getElementById('typearea').innerHTML = this.highlightedSentence;
@@ -112,12 +113,11 @@ components: {
         "suggestions":
           {
                 "1": {"candidates": ["containing"]},
-                "2": {"candidates": ["spelling"]}
+                "2": {"candidates": ["spelling", "spellling"]}
             }
       }
-      this.data = data;
 
-      this.wordTokens = data;
+      this.data = data;
       this.loading = false;
       this.highlightedSentence = "";
       for (var i = 0; i < data.tokens.length; i++) {
@@ -126,7 +126,7 @@ components: {
         }
         else {
           this.highlightedSentence += "<span style ='background-color: red'>" + data.tokens[i] + "</span> ";
-          this.suggestions.push(data.suggestions[i].candidates);
+          this.suggestions.push([data.suggestions[i].candidates,i]);
         }
       }
       document.getElementById('typearea').innerHTML = this.highlightedSentence;
