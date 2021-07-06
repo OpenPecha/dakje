@@ -13,39 +13,13 @@ body {
   background-color: #eeeeee
 }
 
-.container {
-  display: grid;
-  grid-template-columns: 18rem auto 18rem;
-  grid-template-rows: 100vh;
-  grid-template-areas: "sidepanel content suggestion";
-}
 
-.sidepanel {
-  grid-area: sidepanel;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 5rem;
-  background-color: #323439;
-}
-
-.title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #eeeeee
-}
 
 .btn-upload {
   margin-top: 3rem;
 }
 
 
-.content {
-  grid-area: content;
-  margin-left: 1rem;
-  background-color: #FFF;
-}
 
 .correctionarea {
   width: 100%;
@@ -53,10 +27,7 @@ body {
   background-color: #FFF;
 }
 
-.suggestion {
-  grid-area: suggestion;
-  margin-left: 1rem;
-}
+
 
 div.editable {
   height: 500px;
@@ -75,4 +46,3 @@ div#typearea {
 .btn-upload {
   color: #FFF;
 }
-

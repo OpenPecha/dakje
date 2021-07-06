@@ -15,7 +15,20 @@
 
 <script>
 export default {
-    props: ['name', 'id', 'candidates'],
+    props: {
+        name: {
+            type: String,
+            required: true
+        },
+        id: {
+            type: Number,
+            required: true,
+        },
+        candidates: {
+            type: Array,
+            required: true
+        }
+    },
 
     data() {
         return {

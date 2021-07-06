@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+<q-layout view="hHr Lpr lFf">
     <q-header elevated class="bg-primary text-white">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
@@ -8,7 +8,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above side="left" bordered>
+    <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" elevated>
       <div class="text-h3 text-center text-primary q-my-md">Dakje</div>
 
       <q-separator/>
@@ -23,6 +23,12 @@
           </q-file>
           </q-item-section>
         </q-item>
+
+        <q-item>
+          <q-item-section>
+            <download />
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
     <q-page-container>
@@ -33,8 +39,13 @@
 
 <script>
 import { ref } from "vue";
+import Download from '../components/Download.vue';
 
 export default {
+
+  components: {
+    Download,
+  },
   setup() {
     const leftDrawerOpen = ref(false);
 
@@ -46,5 +57,22 @@ export default {
       },
     };
   },
+
+  methods: {
+    uploadFile() {
+      console.log("file uploading");
+      let file = this.$refs.myFile.files[0];
+      if(!file || file.type !== 'text/plain') return;
+      let reader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+      reader.onload = evt => {
+        console.log(evt.target.result);
+        document.getElementById('typearea').innerHTML = evt.target.result;
+      }
+      reader.onerror = evt => {
+        console.error(evt);
+      }
+    },
+  }
 };
 </script>
