@@ -1,136 +1,50 @@
 <template>
-<div class="container">
-  <div class="sidepanel">
-    <div class="title"> Tibetan Spellchecker</div>
-    <input class="btn-upload" type="file" ref="myFile" @change="upload" data-test="upload">
-    <download />
-  </div>
-  <div class="content">
-    <text-editor @paste="onPaste" id="typearea" classname="typearea" data-test="typearea"/>
+  <q-layout view="hHh lpR fFf">
+    <q-header elevated class="bg-primary text-white">
+      <q-toolbar>
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
-    <div v-if="loading">
-      Loading...
-    </div>
-    <div v-else>
-        <!-- request finished -->
-    </div>
+        <q-toolbar-title> Dakje </q-toolbar-title>
+      </q-toolbar>
+    </q-header>
 
-    <button class="check" @click="check" data-test="check">Check</button>
-  </div>
-  <div class="suggestion" data-test="suggestion">
-    <suggestion @selectCorrection="acceptSuggestion" v-for="s in suggestions" v-bind:candidates="s" :key=s :id="s[1]" :name="this.data.tokens[s[1]]" />
-    <br>
-  </div>
-</div>
+    <q-drawer v-model="leftDrawerOpen" show-if-above side="left" bordered>
+      <div class="text-h3 text-center text-primary q-my-md">Dakje</div>
+
+      <q-separator/>
+
+      <q-list padding>
+        <q-item>
+          <q-item-section>
+          <q-file v-model="upload" borderless label="Upload file">
+            <template #prepend>
+              <q-icon name="upload" />
+            </template>
+          </q-file>
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-drawer>
+    <q-page-container>
+      <router-view />
+    </q-page-container>
+  </q-layout>
 </template>
 
 <script>
-import Suggestion from "../components/Suggestion";
-import Download from '../components/Download.vue';
-import TextEditor from '../components/TextEditor.vue';
+import { ref } from "vue";
 
 export default {
-  name: 'App',
+  setup() {
+    const leftDrawerOpen = ref(false);
 
-components: {
-  Suggestion,
-  Download,
-  TextEditor,
-},
-  data() {
     return {
-      suggestions:[],
-      sentence: "",
-      highlightedSentence: "",
-      loading: false,
-      data: [],
-    }
+      leftDrawerOpen,
+      upload: ref(null),
+      toggleLeftDrawer() {
+        leftDrawerOpen.value = !leftDrawerOpen.value;
+      },
+    };
   },
-
-  methods: {
-    onPaste (evt) {
-      this.sentence = evt.clipboardData.getData('text');
-    },
-
-    upload() {
-      console.log("file uploading");
-      let file = this.$refs.myFile.files[0];
-      if(!file || file.type !== 'text/plain') return;
-
-      let reader = new FileReader();
-      reader.readAsText(file, "UTF-8");
-      reader.onload = evt => {
-        console.log(evt.target.result);
-        document.getElementById('typearea').innerHTML = evt.target.result;
-      }
-      reader.onerror = evt => {
-        console.error(evt);
-      }
-    },
-
-    async acceptSuggestion(correction) {
-      console.log(correction)
-
-      //correction[0]: index of suggestion
-      //correction[1]: index of candidate
-
-      this.highlightedSentence = "";
-      this.suggestions=[];
-
-      for (var i = 0; i < this.data.tokens.length; i++) {
-        if (i == correction[0]){
-          this.highlightedSentence += this.data.suggestions[i].candidates[correction[1]] + " ";
-          this.data.tokens[i] = this.data.suggestions[i].candidates[correction[1]];
-          delete this.data.suggestions[i];
-        } else if (!this.data.suggestions.hasOwnProperty(i)) {
-          this.highlightedSentence+=this.data.tokens[i] + " ";
-        } else {
-          this.highlightedSentence += "<span style ='background-color: red'>" + this.data.tokens[i] + "</span> ";
-          this.suggestions.push([this.data.suggestions[i].candidates,i]);
-        }
-      }
-      document.getElementById('typearea').innerHTML = this.highlightedSentence;
-    },
-
-    async check() {
-      console.log("check for correction");
-      this.suggestions = [];
-      this.sentence = document.getElementById('typearea').innerHTML;
-
-      // const requestOptions = {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
-      //   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept" },
-      //   body: JSON.stringify({ text: this.sentence})
-      // };
-      // this.loading = true;
-      // const response = await fetch("http://localhost:8000/api/spellcheck", requestOptions);
-      // const data = await response.json();
-
-      const data = {
-        "text": "text containng spelling mistakes",
-        "tokens": ["text", "containng", "speling", "mistakes"],
-        "suggestions":
-          {
-                "1": {"candidates": ["containing"]},
-                "2": {"candidates": ["spelling", "spellling"]}
-            }
-      }
-
-      this.data = data;
-      this.loading = false;
-      this.highlightedSentence = "";
-      for (var i = 0; i < data.tokens.length; i++) {
-        if (!data.suggestions.hasOwnProperty(i)) {
-          this.highlightedSentence+=data.tokens[i] + " ";
-        }
-        else {
-          this.highlightedSentence += "<span style ='background-color: red'>" + data.tokens[i] + "</span> ";
-          this.suggestions.push([data.suggestions[i].candidates,i]);
-        }
-      }
-      document.getElementById('typearea').innerHTML = this.highlightedSentence;
-    },
-  }
-}
+};
 </script>
