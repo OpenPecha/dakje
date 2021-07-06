@@ -2,10 +2,10 @@
   <q-page>
     <div class="editor">
       <text-editor
-        @paste="onPaste"
         id="typearea"
         classname="typearea"
         data-test="typearea"
+        @paste="onPaste"
       />
 
       <div v-if="loading">Loading...</div>

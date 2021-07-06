@@ -8,17 +8,20 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
-      <div class="title text-primary q-mt-md">Dakje</div>
-      <q-separator class="q-my-md" />
+    <q-drawer v-model="leftDrawerOpen" show-if-above side="left" bordered>
+      <div class="text-h3 text-center text-primary q-my-md">Dakje</div>
+
+      <q-separator/>
 
       <q-list padding>
         <q-item>
-          <q-file outlined v-model="upload" label="Upload file">
-            <template v-slot:prepend>
+          <q-item-section>
+          <q-file v-model="upload" borderless label="Upload file">
+            <template #prepend>
               <q-icon name="upload" />
             </template>
           </q-file>
+          </q-item-section>
         </q-item>
       </q-list>
     </q-drawer>

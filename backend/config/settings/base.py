@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # third-party
     "rest_framework",
+    "corsheaders",
     # local
     "dakje.users.apps.UsersConfig",
     "dakje.spellcheck.apps.SpellcheckConfig",
@@ -113,6 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -170,3 +172,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 DICTIONARY_PATH = env.str("DICTIONARY_PATH")
+
+
+CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS")
