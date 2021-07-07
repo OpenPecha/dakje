@@ -1,7 +1,7 @@
 <template>
   <q-page padding class="row justify-center">
     <div class="col-6">
-      <text-editor id="typearea" classname="typearea" data-test="typearea" @paste="onPaste"/>
+      <text-editor classname="typearea" data-test="typearea" :sentence="sentence" @paste="onPaste"/>
       <button class="check" data-test="check" @click="check">Check</button>
     </div>
 
@@ -36,7 +36,7 @@ components: {
     },
 
     async acceptSuggestion(correction) {
-      console.log(correction)
+      // console.log(correction)
       //correction[0]: index of suggestion
       //correction[1]: index of candidate
       this.highlightedSentence = "";
@@ -53,34 +53,48 @@ components: {
           this.suggestions.push([this.data.suggestions[i].candidates,i]);
         }
       }
-      document.getElementById('typearea').innerHTML = this.highlightedSentence;
+      this.sentence = this.highlightedSentence;
+      // document.getElementById('typearea').innerHTML = this.highlightedSentence;
     },
 
     async check() {
-      console.log("check for correction");
+      // console.log("check for correction");
       this.suggestions = [];
       this.sentence = document.getElementById('typearea').innerHTML;
-      console.log(this.sentence)
+      console.log("sentence: " + this.sentence)
       this.loading = true;
-      const response = await this.$api.post("/spellcheck/", {
-        content: this.sentence
-      });
-      this.data = response.data;
-      console.log(this.data)
-      console.log(data)
+      // const response = await this.$api.post("/spellcheck/", {
+      //   content: this.sentence
+      // });
+      // console.log("response" + response);
+      // this.data = response.data;
+      // console.log("this.data" + this.data)
+
+      const data = {
+        "text": "text containng spelling mistakes",
+        "tokens": ["text", "containng", "speling", "mistakes"],
+        "suggestions":
+          {
+                "1": {"candidates": ["containing"]},
+                "2": {"candidates": ["spelling", "spellling"]}
+            }
+      }
+
+      this.data=data;
       this.loading = false;
 
       this.highlightedSentence = "";
-      for (var i = 0; i < data.tokens.length; i++) {
+      for (var i = 0; i < this.data.tokens.length; i++) {
         if (!data.suggestions.hasOwnProperty(i)) {
-          this.highlightedSentence+=data.tokens[i] + " ";
+          this.highlightedSentence+=this.data.tokens[i] + " ";
         }
         else {
           this.highlightedSentence += "<span style ='background-color: red'>" + data.tokens[i] + "</span> ";
-          this.suggestions.push([data.suggestions[i].candidates,i]);
+          this.suggestions.push([this.data.suggestions[i].candidates,i]);
         }
       }
-      document.getElementById('typearea').innerHTML = this.highlightedSentence;
+
+      this.sentence = this.highlightedSentence;
     },
   }
 }

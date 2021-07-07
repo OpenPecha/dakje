@@ -1,5 +1,5 @@
 <template>
-  <editor-content :editor="editor" />
+  <editor-content id="typearea" :editor="editor" />
 </template>
 
 <script>
@@ -11,9 +11,18 @@ export default {
     EditorContent,
   },
 
+  props: ['sentence'],
+
   data() {
     return {
       editor: null,
+    }
+  },
+
+  watch: {
+    sentence (updatedSentence) {
+      console.log(updatedSentence);
+      this.editor.commands.setContent(updatedSentence);
     }
   },
 
