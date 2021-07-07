@@ -2,11 +2,6 @@
   <q-page padding class="row justify-center">
     <div class="col-6">
       <text-editor id="typearea" classname="typearea" data-test="typearea" @paste="onPaste"/>
-
-      <div v-if="loading">
-        Loading...
-      </div>
-
       <button class="check" data-test="check" @click="check">Check</button>
     </div>
 
@@ -65,26 +60,16 @@ components: {
       console.log("check for correction");
       this.suggestions = [];
       this.sentence = document.getElementById('typearea').innerHTML;
-      // const requestOptions = {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*",
-      //   "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept" },
-      //   body: JSON.stringify({ text: this.sentence})
-      // };
-      // this.loading = true;
-      // const response = await fetch("http://localhost:8000/api/spellcheck", requestOptions);
-      // const data = await response.json();
-      const data = {
-        "text": "text containng spelling mistakes",
-        "tokens": ["text", "containng", "speling", "mistakes"],
-        "suggestions":
-          {
-                "1": {"candidates": ["containing"]},
-                "2": {"candidates": ["spelling", "spellling"]}
-            }
-      }
-      this.data = data;
+      console.log(this.sentence)
+      this.loading = true;
+      const response = await this.$api.post("/spellcheck/", {
+        content: this.sentence
+      });
+      this.data = response.data;
+      console.log(this.data)
+      console.log(data)
       this.loading = false;
+
       this.highlightedSentence = "";
       for (var i = 0; i < data.tokens.length; i++) {
         if (!data.suggestions.hasOwnProperty(i)) {
