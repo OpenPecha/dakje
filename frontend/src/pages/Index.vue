@@ -17,10 +17,10 @@ import TextEditor from '../components/TextEditor.vue';
 
 export default {
   name: 'App',
-components: {
-  Suggestion,
-  TextEditor,
-},
+  components: {
+    Suggestion,
+    TextEditor,
+  },
   data() {
     return {
       suggestions:[],
@@ -49,7 +49,8 @@ components: {
         } else if (!this.data.suggestions.hasOwnProperty(i)) {
           this.highlightedSentence+=this.data.tokens[i] + " ";
         } else {
-          this.highlightedSentence += "<span style ='background-color: red'>" + this.data.tokens[i] + "</span> ";
+          // this.highlightedSentence += "<span style ='background-color: red'>" + this.data.tokens[i] + "</span> ";
+          this.highlightedSentence += "<mark>" + this.data.tokens[i] + "</mark> ";
           this.suggestions.push([this.data.suggestions[i].candidates,i]);
         }
       }
@@ -89,11 +90,11 @@ components: {
           this.highlightedSentence+=this.data.tokens[i] + " ";
         }
         else {
-          this.highlightedSentence += "<span style ='background-color: red'>" + data.tokens[i] + "</span> ";
+          // this.highlightedSentence += "<span style ='background-color: red'>" + data.tokens[i] + "</span> ";
+          this.highlightedSentence += "<mark>" + data.tokens[i] + "</mark> ";
           this.suggestions.push([this.data.suggestions[i].candidates,i]);
         }
       }
-
       this.sentence = this.highlightedSentence;
     },
   }

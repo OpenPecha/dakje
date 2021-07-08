@@ -1,10 +1,13 @@
 <template>
-  <editor-content id="typearea" :editor="editor" />
+  <div>
+    <editor-content id="typearea" :editor="editor" />
+  </div>
 </template>
 
 <script>
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
+import Highlight from '@tiptap/extension-highlight'
 
 export default {
   components: {
@@ -30,7 +33,10 @@ export default {
     this.editor = new Editor({
       content: '<p>Start by entering Tibetan text! 🎉</p>',
       extensions: [
-        StarterKit,
+        StarterKit.configure({
+          history: false,
+        }),
+        Highlight,
       ],
     })
   },
