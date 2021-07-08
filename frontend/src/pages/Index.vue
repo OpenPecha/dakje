@@ -17,19 +17,22 @@ import TextEditor from '../components/TextEditor.vue';
 
 export default {
   name: 'App',
-components: {
-  Suggestion,
-  TextEditor,
-},
+
+  components: {
+    Suggestion,
+    TextEditor,
+  },
+
   data() {
     return {
       suggestions:[],
       sentence: "",
       highlightedSentence: "",
       loading: false,
-      data: [],
+      data: null
     }
   },
+
   methods: {
     onPaste (evt) {
       this.sentence = evt.clipboardData.getData('text');
@@ -59,25 +62,25 @@ components: {
     async check() {
       console.log("check for correction");
       this.suggestions = [];
-      this.sentence = document.getElementById('typearea').innerHTML;
-      console.log(this.sentence)
+      this.sentence = document.getElementById('typearea').innerText;
+
       this.loading = true;
       const response = await this.$api.post("/spellcheck/", {
         content: this.sentence
       });
-      this.data = response.data;
+      this.data = response.data
       console.log(this.data)
-      console.log(data)
+
       this.loading = false;
 
       this.highlightedSentence = "";
-      for (var i = 0; i < data.tokens.length; i++) {
-        if (!data.suggestions.hasOwnProperty(i)) {
-          this.highlightedSentence+=data.tokens[i] + " ";
+      for (var i = 0; i < this.data.tokens.length; i++) {
+        if (!this.data.suggestions.hasOwnProperty(i)) {
+          this.highlightedSentence+=this.data.tokens[i] + " ";
         }
         else {
-          this.highlightedSentence += "<span style ='background-color: red'>" + data.tokens[i] + "</span> ";
-          this.suggestions.push([data.suggestions[i].candidates,i]);
+          this.highlightedSentence += "<span style ='background-color: red'>" + this.data.tokens[i] + "</span> ";
+          this.suggestions.push([this.data.suggestions[i].candidates,i]);
         }
       }
       document.getElementById('typearea').innerHTML = this.highlightedSentence;
