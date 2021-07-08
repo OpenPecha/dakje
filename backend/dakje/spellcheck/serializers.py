@@ -14,7 +14,8 @@ class SuggestionsSerializer(serializers.Serializer):
 
 class ProcessedSerializer(serializers.Serializer):
     text = serializers.CharField()
-    suggestions = SuggestionsSerializer(many=True)
+    tokens = serializers.ListField(child=serializers.CharField())
+    suggestions = serializers.DictField(child=SuggestionsSerializer())
 
 
 class TextSerializer(serializers.Serializer):

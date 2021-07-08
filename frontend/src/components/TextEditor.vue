@@ -31,7 +31,7 @@ export default {
 
   mounted() {
     this.editor = new Editor({
-      content: '<p>Start by entering Tibetan text! 🎉</p>',
+      content: 'ངའ་མིང་ཀྲ་ཤིས་ཟིར།',
       extensions: [
         StarterKit.configure({
           history: false,

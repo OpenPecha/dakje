@@ -27,9 +27,10 @@ export default {
       sentence: "",
       highlightedSentence: "",
       loading: false,
-      data: [],
+      data: null
     }
   },
+
   methods: {
     onPaste (evt) {
       this.sentence = evt.clipboardData.getData('text');
@@ -61,15 +62,14 @@ export default {
     async check() {
       // console.log("check for correction");
       this.suggestions = [];
-      this.sentence = document.getElementById('typearea').innerHTML;
-      console.log("sentence: " + this.sentence)
+      this.sentence = document.getElementById('typearea').innerText;
+
       this.loading = true;
       // const response = await this.$api.post("/spellcheck/", {
       //   content: this.sentence
       // });
-      // console.log("response" + response);
-      // this.data = response.data;
-      // console.log("this.data" + this.data)
+      // this.data = response.data
+      // console.log(this.data)
 
       const data = {
         "text": "text containng spelling mistakes",
@@ -80,8 +80,8 @@ export default {
                 "2": {"candidates": ["spelling", "spellling"]}
             }
       }
-
       this.data=data;
+
       this.loading = false;
 
       this.highlightedSentence = "";

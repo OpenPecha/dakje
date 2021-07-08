@@ -13,7 +13,11 @@ class SpellcheckView(views.APIView):
         serializer = TextSerializer(data=request.data)
         if serializer.is_valid():
             text = serializer.save()
-            text.correct()
-            data = {"text": text.content, "suggestions": text.suggestions}
+            data = {
+                "text": text.content,
+                "tokens": [token.text for token in text.tokens],
+                "suggestions": text.suggestions,
+            }
+            print(data)
             result = ProcessedSerializer(data).data
             return Response(result)

@@ -9,7 +9,7 @@ python = "^3.8"
 Django = "^3.2.4"
 django-environ = "^0.4.5"
 djangorestframework = "^3.12.4"
-bospell = "^0.0.3"
+bospell = "^0.0.4"
 django-cors-headers = "^3.7.0"
 
 [tool.poetry.dev-dependencies]

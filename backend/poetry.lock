@@ -62,7 +62,7 @@ python2 = ["typed-ast (>=1.4.2)"]
 
 [[package]]
 name = "bospell"
-version = "0.0.3"
+version = "0.0.4"
 description = "Spell checking toolkit for Tibetan (boyig)"
 category = "main"
 optional = false
@@ -432,7 +432,7 @@ testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "1d7ef4c3059063318a602c3b15d911cf7713ec4a21cf58b3076bc0f6b7e463e3"
+content-hash = "6815534f65612277f021b4f40d3a52b0b71ba42caf7489fee5aca9f503e1a5e0"
 
 [metadata.files]
 appdirs = [
@@ -456,8 +456,8 @@ black = [
     {file = "black-21.5b1.tar.gz", hash = "sha256:23695358dbcb3deafe7f0a3ad89feee5999a46be5fec21f4f1d108be0bcdb3b1"},
 ]
 bospell = [
-    {file = "bospell-0.0.3-py3-none-any.whl", hash = "sha256:e49d15ca9d4ae5bf09f419afe0eee59b7ae110aaa9153de298c71dc8844c2f93"},
-    {file = "bospell-0.0.3.tar.gz", hash = "sha256:602fe3c1f9a26a4f36784b1ff95c9f273c84d290e039100ee306474a83be9a9c"},
+    {file = "bospell-0.0.4-py3-none-any.whl", hash = "sha256:5cae1ac6f817e8c04142d4bac0ca71737565864793a06c33ba79045be29e00b1"},
+    {file = "bospell-0.0.4.tar.gz", hash = "sha256:60e7d978b68c579c92f4c34bc7ae9db3ffa2a43e9de791c9982c1bcbee562b8f"},
 ]
 botok = [
     {file = "botok-0.8.6-py3-none-any.whl", hash = "sha256:3afe1455a1a9e0160e41fec33d074f0642c85307e0a11c7f1389a9c40ee755de"},
