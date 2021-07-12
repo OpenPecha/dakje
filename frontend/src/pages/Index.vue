@@ -6,7 +6,7 @@
     </div>
 
     <div class="col-2" data-test="suggestion">
-      <suggestion v-for="s in suggestions" :id="s[1]" :key=s :candidates="s" :name="data.tokens[s[1]]" @selectCorrection="acceptSuggestion" />
+      <suggestion v-for="s in suggestions" :id="s[2]" :suggestionIndex="s[1]" :key=s :candidates="s" :name="data.tokens[s[1]]" @selectCorrection="acceptSuggestion" />
     </div>
   </q-page>
 </template>
@@ -37,30 +37,46 @@ export default {
     },
 
     async acceptSuggestion(correction) {
-      // console.log(correction)
-      //correction[0]: index of suggestion
-      //correction[1]: index of candidate
-      this.highlightedSentence = "";
+
+      //when I accept suggestions, call API and redo everything
+      this.check();
+
+      //find index of word in sentence
+      let temp = "";
+      for (var i = 0; i < this.data.tokens.length; i++) {
+        if (i == correction[2]){
+          correction[0] = temp.length;
+        } else {
+          temp += this.data.tokens[i];
+        }
+      }
+
+      //replace word using indices and substring
+
+      //correction[0]: index of suggestion in string
+      //correction[1]: index of candidate in suggestions
+      //correction[2]: index of word in suggestions
+
+      let s1 = this.sentence.substring(0, correction[0]);
+      let s2 = this.sentence.substring(correction[0]);
+
+      let index = s2.search("</mark>") + 7;
+
+      this.highlightedSentence = s1 + this.data.suggestions[correction[2]].candidates[correction[1]] + s2.substring(index);
+
       this.suggestions=[];
       for (var i = 0; i < this.data.tokens.length; i++) {
-        if (i == correction[0]){
-          this.highlightedSentence += this.data.suggestions[i].candidates[correction[1]] + " ";
+        if (i == correction[2]){
           this.data.tokens[i] = this.data.suggestions[i].candidates[correction[1]];
           delete this.data.suggestions[i];
-        } else if (!this.data.suggestions.hasOwnProperty(i)) {
-          this.highlightedSentence+=this.data.tokens[i] + " ";
-        } else {
-          // this.highlightedSentence += "<span style ='background-color: red'>" + this.data.tokens[i] + "</span> ";
-          this.highlightedSentence += "<mark>" + this.data.tokens[i] + "</mark> ";
+        } else if (this.data.suggestions.hasOwnProperty(i)) {
           this.suggestions.push([this.data.suggestions[i].candidates,i]);
         }
       }
       this.sentence = this.highlightedSentence;
-      // document.getElementById('typearea').innerHTML = this.highlightedSentence;
     },
 
     async check() {
-      // console.log("check for correction");
       this.suggestions = [];
       this.sentence = document.getElementById('typearea').innerText;
 
@@ -90,9 +106,9 @@ export default {
           this.highlightedSentence+=this.data.tokens[i] + " ";
         }
         else {
-          // this.highlightedSentence += "<span style ='background-color: red'>" + data.tokens[i] + "</span> ";
+          let wordIndex = this.highlightedSentence.length;
           this.highlightedSentence += "<mark>" + data.tokens[i] + "</mark> ";
-          this.suggestions.push([this.data.suggestions[i].candidates,i]);
+          this.suggestions.push([this.data.suggestions[i].candidates, i, wordIndex]);
         }
       }
       this.sentence = this.highlightedSentence;

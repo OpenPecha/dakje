@@ -24,25 +24,26 @@ export default {
             type: Number,
             required: true,
         },
+        suggestionIndex: {
+            type: Number,
+            required: true,
+        },
         candidates: {
             type: Array,
-            required: true
+            required: true,
         }
     },
 
     data() {
         return {
             selected: this.id,
+            index: this.suggestionIndex,
         }
     },
 
     methods: {
         update(key) {
-            // this.$emit('selectCorrection', key);
-            console.log(this.selected);
-            console.log(key);
-            // console.log(candidates[0]);
-            this.$emit('selectCorrection', [this.selected, key]);
+            this.$emit('selectCorrection', [this.selected, key, this.index]);
         }
     }
 }
