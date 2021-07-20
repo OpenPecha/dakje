@@ -1,11 +1,15 @@
 <template>
-  <q-page padding class="row justify-center">
-    <div class="col-6">
+  <q-page padding class="row wrap">
+    <div class="q-pl-xl q-pt-md col-20">
       <text-editor classname="typearea" data-test="typearea" :sentence="sentence" @paste="onPaste"/>
       <button class="check" data-test="check" @click="check">Check</button>
     </div>
 
+
     <div class="col-2" data-test="suggestion">
+      <div>
+        ({{suggestions.length}}) All Suggestions
+      </div>
       <suggestion v-for="s in suggestions" :id="s[2]" :suggestionIndex="s[1]" :key=s :candidates="s" :name="data.tokens[s[1]]" @selectCorrection="acceptSuggestion" />
     </div>
   </q-page>

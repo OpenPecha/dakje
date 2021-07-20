@@ -36,7 +36,7 @@ div.editable {
 
 div#typearea {
   padding: 10px;
-  font-size: 50px;
+  font-size: 17px;
 }
 
 .check {
@@ -45,4 +45,25 @@ div#typearea {
 
 .btn-upload {
   color: #FFF;
+}
+
+
+/*
+Text Editor
+*/
+
+#typearea {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  width: 650px;
+}
+
+.toolbar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  color: white;
+  text-align: center;
 }

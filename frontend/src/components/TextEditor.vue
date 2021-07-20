@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div v-if="editor">
+    <editor-content id="typearea" :editor="editor" />
+    <div class="toolbar" v-if="editor">
       <button @click="editor.chain().focus().toggleBold().run()" :class="{ 'is-active': editor.isActive('bold') }">
         bold
       </button>
@@ -65,8 +66,6 @@
         redo
       </button>
     </div>
-
-    <editor-content id="typearea" :editor="editor" />
   </div>
 </template>
 
