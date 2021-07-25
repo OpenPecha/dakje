@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="suggestion">
+    <div>
 
         <div class="options">
             <div class="spelling"> {{name}} </div>
@@ -52,21 +52,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.suggestion {
-    padding: 1rem;
-    margin: 1em 1em 0 0;
-    border: 1px solid #cccc
-
-}
-.spelling {
-    padding: 3px;
-    text-decoration: line-through;
-    text-decoration-color: red;
-}
-
-.options {
-    display: flex;
-}
-</style>

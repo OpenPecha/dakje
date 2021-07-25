@@ -1,12 +1,12 @@
 <template>
   <q-page padding class="row wrap">
-    <div class="q-pl-xl q-pt-md col-20">
+    <div class="text-container q-pl-xl q-pt-md col-20">
       <text-editor classname="typearea" data-test="typearea" :sentence="sentence" @paste="onPaste"/>
       <button class="check" data-test="check" @click="check">Check</button>
     </div>
 
 
-    <div class="col-2" data-test="suggestion">
+    <div class="suggestion" data-test="suggestion">
       <div>
         ({{suggestions.length}}) All Suggestions
       </div>
