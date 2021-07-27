@@ -1,14 +1,18 @@
 <template>
 <div>
-    <div class="suggestion">
+    <div>
 
-        {{name}}
+        <div class="options">
+            <div class="spelling"> {{name}} </div>
 
-        <div v-for="(i,index) in candidates[0]" :key=i>
-            <q-btn @click="update(index)" />
-            {{i}}
+            <div v-for="(i,index) in candidates[0]" :key=i>
+                <!-- didn't use q-btn because no customization -->
+                <button label={candidates[0]} @click="update(index)">
+                    {{i}}
+                </button>
+            </div>
+
         </div>
-
     </div>
 </div>
 </template>
@@ -24,33 +28,27 @@ export default {
             type: Number,
             required: true,
         },
+        suggestionIndex: {
+            type: Number,
+            required: true,
+        },
         candidates: {
             type: Array,
-            required: true
+            required: true,
         }
     },
 
     data() {
         return {
             selected: this.id,
+            index: this.suggestionIndex,
         }
     },
 
     methods: {
         update(key) {
-            // this.$emit('selectCorrection', key);
-            console.log(this.selected);
-            console.log(key);
-            // console.log(candidates[0]);
-            this.$emit('selectCorrection', [this.selected, key]);
+            this.$emit('selectCorrection', [this.selected, key, this.index]);
         }
     }
 }
 </script>
-
-<style scoped>
-.suggestion {
-    padding: 1rem;
-    border: 1px solid #cccc
-}
-</style>
