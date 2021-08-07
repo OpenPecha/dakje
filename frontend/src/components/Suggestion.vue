@@ -3,7 +3,7 @@
     <div>
 
         <div class="options">
-            <div class="spelling"> {{name}} </div>
+            <div class="spelling"> {{name[this.id[1]]}} </div>
 
             <div v-for="(i,index) in candidates[0]" :key=i>
                 <!-- didn't use q-btn because no customization -->
@@ -11,6 +11,7 @@
                     {{i}}
                 </button>
             </div>
+            <div v-if="candidates[0].length == 0"> No Suggestions </div>
 
         </div>
     </div>
@@ -22,13 +23,13 @@ export default {
     props: {
         name: {
             type: String,
-            required: true
-        },
-        id: {
-            type: Number,
             required: true,
         },
-        suggestionIndex: {
+        id: {
+            type: Object,
+            required: true,
+        },
+        charIndex: {
             type: Number,
             required: true,
         },
@@ -40,10 +41,17 @@ export default {
 
     data() {
         return {
-            selected: this.id,
-            index: this.suggestionIndex,
+            selected: this.id[2],
+            index: this.id[1],
         }
     },
+
+    // watch: {
+    //     id (newID) {
+    //         console.log("changed");
+    //         this.selected = newID[2];
+    //     }
+    // },
 
     methods: {
         update(key) {
