@@ -10,7 +10,7 @@
       <div>
         ({{suggestions.length}}) All Suggestions
       </div>
-      <suggestion v-for="s in suggestions" :id="s" :key=s :charIndex="s[2]" :candidates="s" :name="data.tokens" @selectCorrection="acceptSuggestion" />
+      <suggestion v-for="s in suggestions" :id="s" :key=s :candidates="s" :name="data.tokens" @selectCorrection="acceptSuggestion" />
     </div>
   </q-page>
 </template>
@@ -47,25 +47,14 @@ export default {
         correction[2]: index of word in suggestions
       */
 
-      console.log("starting index " + correction[0])
       let s1 = this.sentence.substring(0, correction[0]);
       let s2 = this.sentence.substring(correction[0]);
-      console.log(s1)
-      console.log(s2)
       let index = s2.search("</mark>") + 7;
-
-      console.log(this.data.suggestions)
-      console.log(correction[2])
       let newWord = this.data.suggestions[correction[2]].candidates[correction[1]]
-      console.log("newword: " + newWord)
       this.highlightedSentence = s1 + newWord + s2.substring(index);
-      console.log(this.sentence)
-      console.log(this.highlightedSentence)
 
       let wordLengthDifference = (index-s1.length-13) - newWord.length;
       let offset = wordLengthDifference + 13;
-      console.log("offset " + offset)
-
 
       /*
         suggestions[i][0]: candidates for corrections
@@ -73,8 +62,8 @@ export default {
         suggestions[i][2]: index of word in string
       */
 
-      //update every following word by update length
       var deleted = false;
+      //update every following word by update length
       for (var i = 0; i < this.suggestions.length; i++) {
         if (this.suggestions[i][1] == correction[2] && !deleted){
           this.suggestions.splice(i, 1);

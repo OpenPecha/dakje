@@ -29,10 +29,6 @@ export default {
             type: Object,
             required: true,
         },
-        charIndex: {
-            type: Number,
-            required: true,
-        },
         candidates: {
             type: Array,
             required: true,
@@ -45,14 +41,6 @@ export default {
             index: this.id[1],
         }
     },
-
-    // watch: {
-    //     id (newID) {
-    //         console.log("changed");
-    //         this.selected = newID[2];
-    //     }
-    // },
-
     methods: {
         update(key) {
             this.$emit('selectCorrection', [this.selected, key, this.index]);
