@@ -10,7 +10,7 @@
       <div>
         ({{suggestions.length}}) All Suggestions
       </div>
-      <suggestion v-for="s in suggestions" :id="s[2]" :suggestionIndex="s[1]" :key=s :candidates="s" :name="data.tokens[s[1]]" @selectCorrection="acceptSuggestion" />
+      <suggestion v-for="s in suggestions" :id="s" :key=s :candidates="s" :name="data.tokens" @selectCorrection="acceptSuggestion" />
     </div>
   </q-page>
 </template>
@@ -41,40 +41,38 @@ export default {
     },
 
     async acceptSuggestion(correction) {
-
-      //when I accept suggestions, call API and redo everything
-      this.check();
-
-      //find index of word in sentence
-      let temp = "";
-      for (var i = 0; i < this.data.tokens.length; i++) {
-        if (i == correction[2]){
-          correction[0] = temp.length;
-        } else {
-          temp += this.data.tokens[i];
-        }
-      }
-
-      //replace word using indices and substring
-
-      //correction[0]: index of suggestion in string
-      //correction[1]: index of candidate in suggestions
-      //correction[2]: index of word in suggestions
+      /*
+        correction[0]: index of suggestion in string
+        correction[1]: index of candidate in suggestions
+        correction[2]: index of word in suggestions
+      */
 
       let s1 = this.sentence.substring(0, correction[0]);
       let s2 = this.sentence.substring(correction[0]);
-
       let index = s2.search("</mark>") + 7;
+      let newWord = this.data.suggestions[correction[2]].candidates[correction[1]]
+      this.highlightedSentence = s1 + newWord + s2.substring(index);
 
-      this.highlightedSentence = s1 + this.data.suggestions[correction[2]].candidates[correction[1]] + s2.substring(index);
+      let wordLengthDifference = (index-s1.length-13) - newWord.length;
+      let offset = wordLengthDifference + 13;
 
-      this.suggestions=[];
-      for (var i = 0; i < this.data.tokens.length; i++) {
-        if (i == correction[2]){
-          this.data.tokens[i] = this.data.suggestions[i].candidates[correction[1]];
-          delete this.data.suggestions[i];
-        } else if (this.data.suggestions.hasOwnProperty(i)) {
-          this.suggestions.push([this.data.suggestions[i].candidates,i]);
+      /*
+        suggestions[i][0]: candidates for corrections
+        suggestions[i][1]: index of word
+        suggestions[i][2]: index of word in string
+      */
+
+      var deleted = false;
+      //update every following word by update length
+      for (var i = 0; i < this.suggestions.length; i++) {
+        if (this.suggestions[i][1] == correction[2] && !deleted){
+          this.suggestions.splice(i, 1);
+          deleted = true;
+          i--;
+        } else if (this.suggestions[i][1] >= correction[2]) { //update the index of each following suggestion
+          this.suggestions[i][2] = this.suggestions[i][2] - offset;
+          let temp = [...this.suggestions[i]] //create a copy to refresh display
+          this.suggestions.splice(i, 1, temp)
         }
       }
       this.sentence = this.highlightedSentence;
@@ -85,34 +83,24 @@ export default {
       this.sentence = document.getElementById('typearea').innerText;
 
       this.loading = true;
-      // const response = await this.$api.post("/spellcheck/", {
-      //   content: this.sentence
-      // });
-      // this.data = response.data
-      // console.log(this.data)
-
-      const data = {
-        "text": "text containng spelling mistakes",
-        "tokens": ["text", "containng", "speling", "mistakes"],
-        "suggestions":
-          {
-                "1": {"candidates": ["containing"]},
-                "2": {"candidates": ["spelling", "spellling"]}
-            }
-      }
-      this.data=data;
+      const response = await this.$api.post("/spellcheck/", {
+        content: this.sentence
+      });
+      this.data = response.data
+      console.log(this.data)
 
       this.loading = false;
 
       this.highlightedSentence = "";
       for (var i = 0; i < this.data.tokens.length; i++) {
-        if (!data.suggestions.hasOwnProperty(i)) {
+        if (!this.data.suggestions.hasOwnProperty(i)) {
           this.highlightedSentence+=this.data.tokens[i] + " ";
         }
         else {
-          let wordIndex = this.highlightedSentence.length;
-          this.highlightedSentence += "<mark>" + data.tokens[i] + "</mark> ";
-          this.suggestions.push([this.data.suggestions[i].candidates, i, wordIndex]);
+          var charIndex = this.highlightedSentence.length;
+          console.log("charIndex" + charIndex)
+          this.highlightedSentence += "<mark>" + this.data.tokens[i] + "</mark> ";
+          this.suggestions.push([this.data.suggestions[i].candidates, i, charIndex]);
         }
       }
       this.sentence = this.highlightedSentence;
