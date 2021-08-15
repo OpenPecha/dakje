@@ -57,13 +57,14 @@ export default {
 
   watch: {
     sentence (updatedSentence) {
-      this.editor.commands.setContent(updatedSentence);
+      this.editor.commands.setContent(updatedSentence)
     }
   },
 
   mounted() {
     this.editor = new Editor({
-      content: 'ངའ་མིང་ཀྲ་ཤིས་ཟིར།',
+      // content: 'ངའ་མིང་ཀྲ་ཤིས་ཟིར།',
+      content: 'ངའ་མིང་ཀྲ་ཤིས་ཟིར།ངའ་མིང་ཀྲ་ཤིས་ཟིར།ངའ་མིང་ཀྲ་ཤིས་ཟིར།ངའ་མིང་ཀྲ་ཤིས་ཟིར།ངའ་མིང་ཀྲ་ཤིས་ཟིར།',
       extensions: [
         StarterKit,
         Highlight,
