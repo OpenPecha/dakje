@@ -1,8 +1,8 @@
 <template>
   <q-page padding class="row wrap">
     <div class="text-container q-pl-xl q-pt-md col-20">
-      <text-editor classname="typearea" data-test="typearea" :sentence="sentence" @paste="onPaste"/>
-      <button class="check" data-test="check" @click="check">Check</button>
+      <text-editor classname="typearea" data-test="typearea" :sentence="sentence" @paste="onPaste" @keyup="autocheck"/>
+      <button class="check" data-test="check" @click="check">Check<span v-show="isLoading">ing... <font-awesome-icon icon="spinner" /></span></button>
     </div>
 
 
@@ -18,26 +18,42 @@
 <script>
 import Suggestion from "../components/Suggestion";
 import TextEditor from '../components/TextEditor.vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 export default {
   name: 'App',
   components: {
     Suggestion,
     TextEditor,
+    FontAwesomeIcon,
   },
   data() {
     return {
       suggestions:[],
       sentence: "",
       highlightedSentence: "",
-      loading: false,
-      data: null
+      isLoading: false,
+      data: null,
+      timeout: null
     }
   },
-
   methods: {
     onPaste (evt) {
       this.sentence = evt.clipboardData.getData('text');
+    },
+
+    autocheck: function() {
+
+      // clear timeout variable
+      clearTimeout(this.timeout);
+      var self = this;
+
+      this.timeout = setTimeout(function () {
+          // enter this block of code after 1 second
+          console.log("autochecked")
+          self.check()
+      }, 1000);
+
     },
 
     async acceptSuggestion(correction) {
@@ -82,14 +98,14 @@ export default {
       this.suggestions = [];
       this.sentence = document.getElementById('typearea').innerText;
 
-      this.loading = true;
+      this.isLoading = true;
       const response = await this.$api.post("/spellcheck/", {
         content: this.sentence
       });
       this.data = response.data
       console.log(this.data)
 
-      this.loading = false;
+      this.isLoading = false;
 
       this.highlightedSentence = "";
       for (var i = 0; i < this.data.tokens.length; i++) {
@@ -105,6 +121,6 @@ export default {
       }
       this.sentence = this.highlightedSentence;
     },
-  }
+  },
 }
 </script>
