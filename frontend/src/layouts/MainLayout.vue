@@ -16,7 +16,16 @@
       <q-list padding>
         <q-item>
           <q-item-section>
-          <q-file v-model="upload" borderless label="Upload file">
+          <q-file
+            v-model="upload"
+            borderless
+            label="Upload file"
+            @update:v-model="uploadFile"
+            v-on:change="uploadFile"
+          >
+          <div>
+            <q-btn label="Submit" type="submit" color="primary"/>
+          </div>
             <template #prepend>
               <q-icon name="upload" />
             </template>
@@ -60,9 +69,7 @@ export default {
 
   methods: {
     uploadFile() {
-      console.log("file uploading");
-      let file = this.$refs.myFile.files[0];
-      if(!file || file.type !== 'text/plain') return;
+      let file = this.upload;
       let reader = new FileReader();
       reader.readAsText(file, "UTF-8");
       reader.onload = evt => {
@@ -72,6 +79,7 @@ export default {
       reader.onerror = evt => {
         console.error(evt);
       }
+      this.toggleLeftDrawer();
     },
   }
 };

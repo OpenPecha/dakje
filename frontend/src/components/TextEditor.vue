@@ -63,8 +63,7 @@ export default {
 
   mounted() {
     this.editor = new Editor({
-      // content: 'ངའ་མིང་ཀྲ་ཤིས་ཟིར།',
-      content: 'ངའ་མིང་ཀྲ་ཤིས་ཟིར།ངའ་མིང་ཀྲ་ཤིས་ཟིར།ངའ་མིང་ཀྲ་ཤིས་ཟིར།ངའ་མིང་ཀྲ་ཤིས་ཟིར།ངའ་མིང་ཀྲ་ཤིས་ཟིར།',
+      content: 'ངའ་མིང་ཀྲ་ཤིས་ཟིར།',
       extensions: [
         StarterKit,
         Highlight,
