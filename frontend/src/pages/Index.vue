@@ -10,7 +10,12 @@
       <div>
         ({{suggestions.length}}) All Suggestions
       </div>
-      <suggestion v-for="s in suggestions" :id="s" :key=s :candidates="s" :name="data.tokens" @selectCorrection="acceptSuggestion" />
+      <suggestion
+        v-for="s in suggestions"
+        :id="s" :key=s :candidates="s"
+        :name="data.tokens"
+        @selectCorrection="acceptSuggestion"
+      />
     </div>
   </q-page>
 </template>

@@ -23,9 +23,6 @@
             @update:v-model="uploadFile"
             v-on:change="uploadFile"
           >
-          <div>
-            <q-btn label="Submit" type="submit" color="primary"/>
-          </div>
             <template #prepend>
               <q-icon name="upload" />
             </template>
