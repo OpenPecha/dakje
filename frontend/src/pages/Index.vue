@@ -10,7 +10,14 @@
       <div>
         ({{suggestions.length}}) All Suggestions
       </div>
-      <suggestion v-for="s in suggestions" :id="s" :key=s :candidates="s" :name="data.tokens" @selectCorrection="acceptSuggestion" />
+      <suggestion
+        v-for="s in suggestions"
+        :id="s"
+        :key=s
+        :candidates="s"
+        :name="data.tokens"
+        @selectCorrection="acceptSuggestion"
+      />
     </div>
   </q-page>
 </template>
@@ -38,49 +45,53 @@ export default {
     }
   },
   methods: {
+
+    /**
+     * Strips HTML tags when pasting content
+     * @param {Object} evt Event
+     */
     onPaste (evt) {
       this.sentence = evt.clipboardData.getData('text');
     },
 
+    /**
+     * Automatically checks content after 2 seconds of inactivity
+     */
     autocheck: function() {
-
       // clear timeout variable
       clearTimeout(this.timeout);
       var self = this;
 
       this.timeout = setTimeout(function () {
-          // enter this block of code after 1 second
-          console.log("autochecked")
           self.check()
       }, 2000);
 
     },
 
+    /**
+     * Updates text on screen when user accepts a suggestion.
+     * @param {Array} correction Contains data on where to replace text
+     *
+     * correction[0]: index of suggestion in string
+     * correction[1]: index of candidate in suggestions
+     * correction[2]: index of word in suggestions
+     */
     async acceptSuggestion(correction) {
-      /*
-        correction[0]: index of suggestion in string
-        correction[1]: index of candidate in suggestions
-        correction[2]: index of word in suggestions
-      */
-      console.log(this.sentence)
-      let s1 = this.sentence.substring(0, correction[0]);
-      let s2 = this.sentence.substring(correction[0]);
-      let index = s2.search("</mark>") + 7;
+      let s1 = this.sentence.substring(0, correction[0]); //from index 0 to location of word
+      let s2 = this.sentence.substring(correction[0]); //from location of word to end of sentence
+      let index = s2.search("</mark>") + 7; //end of highlighted word
 
-      let oldWord = s2.substring(6, s2.search("</mark>"))
+      let oldWord = s2.substring(6, s2.search("</mark>")) //6 is length of "<mark>"
       let newWord = this.data.suggestions[correction[2]].candidates[correction[1]]
-      this.highlightedSentence = s1 + newWord + s2.substring(index);
+      this.highlightedSentence = s1 + newWord + s2.substring(index); //construct new sentence
 
-      let wordLengthDifference = oldWord.length - newWord.length;
+      let offset = oldWord.length - newWord.length + 13; //+13 for removed <mark> and </mark>
 
-      let offset = wordLengthDifference + 13;
-
-      console.log("s1:" + s1.length + ", s2:" + s2.length + ", index:" + index + ", newWord:" + newWord +", wordLengthDif: " + wordLengthDifference)
-      /*
-        suggestions[i][0]: candidates for corrections
-        suggestions[i][1]: index of word
-        suggestions[i][2]: index of word in string
-      */
+      /**
+       * suggestions[i][0]: candidates for corrections
+       * suggestions[i][1]: index of word
+       * suggestions[i][2]: index of word in string
+       */
 
       var deleted = false;
       //update every following word by update length
@@ -91,15 +102,16 @@ export default {
           i--;
         } else if (this.suggestions[i][1] >= correction[2]) { //update the index of each following suggestion
           this.suggestions[i][2] = this.suggestions[i][2] - offset;
-          let temp = [...this.suggestions[i]] //create a copy to refresh display
-          this.suggestions.splice(i, 1, temp)
+          let newSuggestion = [...this.suggestions[i]] //create a copy to refresh display
+          this.suggestions.splice(i, 1, newSuggestion)
         }
       }
       this.sentence = this.highlightedSentence;
-      console.log(this.sentence)
-
     },
 
+    /**
+     *  Sends content to API for spellchecking. Called automatically or when check button pressed.
+     */
     async check() {
       this.suggestions = [];
       this.sentence = document.getElementById('typearea').innerText;
@@ -109,7 +121,6 @@ export default {
         content: this.sentence
       });
       this.data = response.data
-      console.log(this.data)
 
       this.highlightedSentence = "";
       for (var i = 0; i < this.data.tokens.length; i++) {

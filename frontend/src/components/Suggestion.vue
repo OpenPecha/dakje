@@ -2,7 +2,7 @@
 <div>
     <div>
 
-        <div class="options">
+        <div class="options" data-test="acceptSuggestion">
             <div class="spelling"> {{name[this.id[1]]}} </div>
 
             <div v-for="(i,index) in candidates[0]" :key=i>

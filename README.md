@@ -21,7 +21,7 @@ setup pre-commit hooks
 $ pre-commit install
 ```
 
-### Runing server
+### Running server
 ```console
 $ poetry run python manage.py runserver
 ```
