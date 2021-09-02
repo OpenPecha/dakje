@@ -6,14 +6,6 @@
   opacity: 20%;
 }
 
-body {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #eeeeee
-}
-
-
 
 .btn-upload {
   margin-top: 3rem;
@@ -57,14 +49,6 @@ Text Editor
   display: flex;
   flex-direction: column;
   width: 650px;
-}
-
-.toolbar {
-  position: fixed;
-  bottom: 0;
-  color: white;
-  text-align: center;
-  padding-left: 10px;
 }
 
 
