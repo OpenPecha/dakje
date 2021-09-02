@@ -36,6 +36,8 @@ import Navbar from "components/Navbar.vue";
 import Sidebar from "components/Sidebar.vue";
 
 export default {
+  name: "MainLayout",
+
   components: {
     Navbar,
     Sidebar,
@@ -43,15 +45,24 @@ export default {
 
   data() {
     return {
-      menuOpen: false,
       menuMini: true,
-      upload: null,
     };
+  },
+
+  computed: {
+    menuOpen: {
+      get() {
+        return this.$store.state.base.menuOpen;
+      },
+      set() {
+        this.$store.commit("base/toggleMenu");
+      },
+    },
   },
 
   methods: {
     onToggleMenu() {
-      this.menuOpen = true;
+      this.$store.commit("base/toggleMenu");
     },
 
     onAbout() {
