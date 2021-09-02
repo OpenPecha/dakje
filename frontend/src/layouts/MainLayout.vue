@@ -4,34 +4,26 @@
       <Navbar @toggleMenu="onToggleMenu" />
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" elevated>
-      <div class="text-h3 text-center text-primary q-my-md">Dakje</div>
-
-      <q-separator />
-
-      <q-list padding>
-        <q-item>
-          <q-item-section>
-            <q-file
-              v-model="upload"
-              borderless
-              label="Upload file"
-              @update:v-model="uploadFile"
-              @change="uploadFile"
-            >
-              <template #prepend>
-                <q-icon name="upload" />
-              </template>
-            </q-file>
-          </q-item-section>
-        </q-item>
-
-        <q-item>
-          <q-item-section>
-            <download />
-          </q-item-section>
-        </q-item>
-      </q-list>
+    <q-drawer
+      v-model="menuOpen"
+      mini-to-overlay
+      bordered
+      :mini="menuMini"
+      @mouseover="menuMini = false"
+      @mouseout="menuMini = true"
+    >
+      <Sidebar
+        @about="onAbout"
+        @newFile="onNewFile"
+        @openFile="onOpenFile"
+        @saveFile="onSaveFile"
+        @saveFileAs="onSaveFileAs"
+        @importFile="onImportFile"
+        @exportFileAs="onExportFileAs"
+        @printFile="onPrintFile"
+        @settings="onSettings"
+        @exit="onExit"
+      />
     </q-drawer>
     <q-page-container>
       <router-view />
@@ -40,39 +32,66 @@
 </template>
 
 <script>
-import Download from "components/Download.vue";
 import Navbar from "components/Navbar.vue";
+import Sidebar from "components/Sidebar.vue";
 
 export default {
   components: {
-    Download,
     Navbar,
+    Sidebar,
   },
 
   data() {
     return {
-      leftDrawerOpen: false,
+      menuOpen: false,
+      menuMini: true,
       upload: null,
     };
   },
 
   methods: {
     onToggleMenu() {
-      this.leftDrawerOpen = true;
+      this.menuOpen = true;
     },
 
-    uploadFile() {
-      let file = this.upload;
-      let reader = new FileReader();
-      reader.readAsText(file, "UTF-8");
-      reader.onload = (evt) => {
-        console.log(evt.target.result);
-        document.getElementById("typearea").innerHTML = evt.target.result;
-      };
-      reader.onerror = (evt) => {
-        console.error(evt);
-      };
-      this.toggleLeftDrawer();
+    onAbout() {
+      //
+    },
+
+    onNewFile() {
+      //
+    },
+
+    onOpenFile() {
+      //
+    },
+
+    onSaveFile() {
+      //
+    },
+
+    onSaveFileAs() {
+      //
+    },
+
+    onImportFile() {
+      //
+    },
+
+    onExportFileAs() {
+      //
+    },
+
+    onPrintFile() {
+      //
+    },
+
+    onSettings() {
+      //
+    },
+
+    onExit() {
+      //
     },
   },
 };
