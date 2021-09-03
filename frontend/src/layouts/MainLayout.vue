@@ -61,6 +61,33 @@ export default {
   },
 
   methods: {
+    async showConfirmDlg(opts) {
+      return new Promise((resolve, reject) => {
+        try {
+          this.$q
+            .dialog(opts)
+            .onOk((data) => resolve(data || true))
+            .onCancel(() => resolve(false));
+        } catch (err) {
+          reject(err);
+        }
+      });
+    },
+
+    async confrimChangeDiscard() {
+      const isChanged = this.$store.getters["editor/isChanged"];
+      console.log(isChanged);
+      return (
+        !isChanged ||
+        (await this.showConfirmDlg({
+          title: this.$t("There are unsaved changes"),
+          message: this.$t("Do you confrim you want to discard them?"),
+          cancle: true,
+          persistent: true,
+        }))
+      );
+    },
+
     onToggleMenu() {
       this.$store.commit("base/toggleMenu");
     },
@@ -69,11 +96,14 @@ export default {
       //
     },
 
-    onNewFile() {
-      this.$store.dispatch("editor/newFile");
+    async onNewFile() {
+      const confirmed = await this.confrimChangeDiscard();
+      if (confirmed) {
+        this.$store.dispatch("editor/newFile");
+      }
     },
 
-    onOpenFile() {
+    async onOpenFile() {
       //
     },
 
