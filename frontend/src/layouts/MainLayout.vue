@@ -70,7 +70,7 @@ export default {
     },
 
     onNewFile() {
-      //
+      this.$store.dispatch("editor/newFile");
     },
 
     onOpenFile() {
@@ -78,7 +78,7 @@ export default {
     },
 
     onSaveFile() {
-      //
+      this.$store.dispatch("editor/saveFile");
     },
 
     onSaveFileAs() {

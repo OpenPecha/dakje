@@ -8,6 +8,9 @@
 import { Editor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 
+import { LocalStorage } from "quasar";
+import { CONTENT_CACHE_KEY } from "../config";
+
 export default {
   name: "Editor",
 
@@ -28,11 +31,26 @@ export default {
       };
     },
   },
+  watch: {
+    "$store.state.editor.contentHTML": function (val) {
+      this.setContent(val);
+    },
+  },
 
   mounted() {
+    const html = LocalStorage.getItem(CONTENT_CACHE_KEY);
+    this.$store.dispatch("editor/updateContent", html);
+    const finalizeContent = this.finalizeContent;
+    const store = this.$store;
     this.editor = new Editor({
-      content: "<p>I’m running tiptap with Vue.js. 🎉</p>",
       extensions: [StarterKit],
+      content: html,
+      onUpdate({ editor }) {
+        const html = editor.getHTML();
+        const content = finalizeContent(html);
+        console.log(content);
+        store.dispatch("editor/updateContent", content);
+      },
     });
   },
 
@@ -43,6 +61,18 @@ export default {
   methods: {
     focus() {
       this.editor.commands.focus();
+    },
+
+    setContent(content) {
+      const current = this.editor.getHTML();
+      if (content != current) {
+        this.editor.commands.setContent(content);
+        this.editor.commands.focus();
+      }
+    },
+
+    finalizeContent(html) {
+      return html;
     },
   },
 };
