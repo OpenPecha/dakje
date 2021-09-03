@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     # local
     "dakje.users.apps.UsersConfig",
     "dakje.spellcheck.apps.SpellcheckConfig",
+    "dakje.grader.apps.GraderConfig",
 ]
 
 # AUTHENTICATION
