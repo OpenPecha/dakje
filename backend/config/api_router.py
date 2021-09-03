@@ -1,3 +1,4 @@
+from dakje.grader.views import TokensView
 from dakje.spellcheck.views import SpellcheckView
 from dakje.users import views as users_views
 from django.conf import settings
@@ -17,4 +18,7 @@ app_name = "api"
 urlpatterns = router.urls
 
 # register non viewset
-urlpatterns += [path("spellcheck/", SpellcheckView.as_view())]
+urlpatterns += [
+    path("spellcheck/", SpellcheckView.as_view()),
+    path("tokens/", TokensView.as_view()),
+]
