@@ -32,6 +32,9 @@
 </template>
 
 <script>
+import { importFile } from "src/utils/loadfile";
+import { extractHTMLContent } from "src/utils/conversion";
+
 import Navbar from "components/Navbar.vue";
 import Sidebar from "components/Sidebar.vue";
 
@@ -76,13 +79,12 @@ export default {
 
     async confrimChangeDiscard() {
       const isChanged = this.$store.getters["editor/isChanged"];
-      console.log(isChanged);
       return (
         !isChanged ||
         (await this.showConfirmDlg({
           title: this.$t("There are unsaved changes"),
           message: this.$t("Do you confrim you want to discard them?"),
-          cancle: true,
+          cancel: true,
           persistent: true,
         }))
       );
@@ -104,7 +106,14 @@ export default {
     },
 
     async onOpenFile() {
-      //
+      const confirmed = await this.confrimChangeDiscard();
+      if (confirmed) {
+        const file = await importFile(["text/html"]);
+        this.$store.dispatch("editor/loadFile", {
+          name: file.name,
+          html: extractHTMLContent(file.content),
+        });
+      }
     },
 
     onSaveFile() {
