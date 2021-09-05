@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="column full-height" @click="onFocus">
+  <q-page class="column full-height" @click="onFocus">
     <editor ref="editor" class="col" />
   </q-page>
 </template>
