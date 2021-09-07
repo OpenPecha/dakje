@@ -1,4 +1,6 @@
 # Dakje Backend
+- [Endpoints](#endpoints)
+- [Backend local Development](#backend-local-development)
 
 ## Endpoints
 
