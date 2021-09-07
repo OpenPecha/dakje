@@ -29,6 +29,6 @@ class Token(BaseModel):
 
 class Sentence(BaseModel):
     content: str
-    sentence_lenght: int
+    sentence_length: int
     verb_per_sentence: int
     span: Span
