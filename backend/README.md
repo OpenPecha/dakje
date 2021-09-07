@@ -10,14 +10,14 @@
 endpoint-name: `/segment`
 method: `POST`
 
-input:
+input: schema -> `Text`
 ```json
 {
   "content": "dakje content"
 }
 ```
 
-output:
+output: -> schema -> `list[Token]`
 ```json
 [
     {
@@ -32,14 +32,14 @@ output:
 endpoint-name: `/analyse-sentence`
 method: `POST`
 
-input:
+input: schema -> `Text`
 ```json
 {
   "content": "dakje content"
 }
 ```
 
-output:
+output: schema -> `List[Sentence]`
 ```json
 [
     {
