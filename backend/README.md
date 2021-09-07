@@ -3,8 +3,10 @@
 - [Backend local Development](#backend-local-development)
 
 ## Endpoints
+- [Text Segmentation](#text-segmentation)
+- [Sentence Analysis](#sentence-analysis)
 
-### Segmenting the text
+### Text Segmentation
 endpoint-name: `/segment`
 method: `POST`
 
@@ -28,7 +30,7 @@ output:
 }
 ```
 
-### Analyse Sentence
+### Sentence Analysis
 endpoint-name: `/analyse-sentence`
 method: `POST`
 
