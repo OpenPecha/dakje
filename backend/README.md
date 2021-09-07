@@ -43,7 +43,7 @@ output:
 ```json
 [
     {
-      "sentence": "sentence text",
+      "content": "sentence text",
       "sentence_length": 10,
       "verb_per_sentence": 2,
       "span": {
