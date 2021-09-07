@@ -15,7 +15,7 @@ class Settings(BaseSettings):
             return v
         raise ValueError(v)
 
-    PROJECT_NAME: str
+    PROJECT_NAME: str = "dakje-backend"
 
     class Config:
         case_sensitive = True
