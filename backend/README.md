@@ -10,48 +10,49 @@
 endpoint-name: `/segment`
 method: `POST`
 
-input:
+input: schema -> `Text`
 ```json
 {
   "content": "dakje content"
 }
 ```
 
-output:
+output: -> schema -> `list[Token]`
 ```json
-{
-  "tokens": [
+[
     {
       "form": "dakje",
       "pos": "NOUN"
     },
     ...
-  ]
-}
+]
 ```
 
 ### Sentence Analysis
 endpoint-name: `/analyse-sentence`
 method: `POST`
 
-input:
+input: schema -> `Text`
 ```json
 {
   "content": "dakje content"
 }
 ```
 
-output:
+output: schema -> `List[Sentence]`
 ```json
-{
-  "sentences": [
+[
     {
+      "content": "sentence text",
       "sentence_length": 10,
-      "verb_per_sentence": 2
+      "verb_per_sentence": 2,
+      "span": {
+        "start": 5,
+        "end": 20
+      }
     },
     ...
-  ]
-}
+]
 ```
 
 ## Backend local development
