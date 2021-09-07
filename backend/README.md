@@ -19,15 +19,13 @@ input:
 
 output:
 ```json
-{
-  "tokens": [
+[
     {
       "form": "dakje",
       "pos": "NOUN"
     },
     ...
-  ]
-}
+]
 ```
 
 ### Sentence Analysis
@@ -43,15 +41,18 @@ input:
 
 output:
 ```json
-{
-  "sentences": [
+[
     {
+      "sentence": "sentence text",
       "sentence_length": 10,
-      "verb_per_sentence": 2
+      "verb_per_sentence": 2,
+      "span": {
+        "start": 5,
+        "end": 20
+      }
     },
     ...
-  ]
-}
+]
 ```
 
 ## Backend local development
