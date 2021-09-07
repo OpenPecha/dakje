@@ -1,21 +1,17 @@
 [tool.poetry]
-name = "dakje"
+name = "dakje-backend"
 version = "0.1.0"
-description = ""
+description = "Dakje backend"
 authors = ["tenzin <ten13zin@gmail.com>"]
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-Django = "^3.2.4"
-django-environ = "^0.4.5"
-djangorestframework = "^3.12.4"
-bospell = "^0.0.4"
-django-cors-headers = "^3.7.0"
+fastapi = "^0.68.1"
 
 [tool.poetry.dev-dependencies]
-pre-commit = "^2.12.1"
-pytest = "^6.2.2"
-black = "^21.5b1"
+black = "^21.8b0"
+isort = "^5.9.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
