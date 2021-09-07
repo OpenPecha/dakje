@@ -68,13 +68,10 @@ Frontend, built with Docker, with routes handled based on the path: http://local
 
 Backend, JSON based web API based on OpenAPI: http://localhost/api/
 
-Automatic interactive documentation with Swagger UI (from the OpenAPI backend): http://localhost/docs
+Automatic interactive documentation with Swagger UI (from the OpenAPI backend): http://localhost/api/docs
 
 Alternative automatic documentation with ReDoc (from the OpenAPI backend): http://localhost/redoc
 
-PGAdmin, PostgreSQL web administration: http://localhost:5050
-
-Flower, administration of Celery tasks: http://localhost:5555
 
 Traefik UI, to see how the routes are being handled by the proxy: http://localhost:8090
 
