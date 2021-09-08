@@ -49,7 +49,8 @@ output: -> schema -> `list[Token]`
                 },
                 ...
             ],
-        }
+        },
+        ...
     }
 }     
 ```
