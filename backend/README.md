@@ -6,8 +6,8 @@
 - [Text Segmentation](#text-segmentation)
 - [Sentence Analysis](#sentence-analysis)
 
-### Text Segmentation
-endpoint-name: `/segment`
+### Profiling Vocabularies
+endpoint-name: `/profile-vocab`
 method: `POST`
 
 input: schema -> `Text`
@@ -19,24 +19,43 @@ input: schema -> `Text`
 
 output: -> schema -> `list[Token]`
 ```python
-[
-    {                             # Token
-      "form": "dakje",
-      "pos": "NOUN",
-      "levels": [
-         {                        # VocabLevel
-            "type": "general",
-            "label": "A0"
-         },
-         ...
-      ]
-    },
-    ...
-]
+{
+    "tokens": [
+        {                             # Token
+          "form": "dakje",
+          "pos": "NOUN",
+          "levels": [
+             {                        # VocabLevel
+                "type": "general",
+                "label": "A0"
+             },
+             ...
+          ]
+        },
+        ...
+    ],
+   
+    "statistic": {
+        "general": {                   # WordListStatistic
+            "name": "general",
+            "total_hit": 90,
+            "total_miss": 10,
+            "levels": [                # LevelStatistic
+                {
+                    "type": "general",
+                    "label": "A0",
+                    "count": 20,
+                    "percent": 20,
+                },
+                ...
+            ],
+        }
+    }
+      
 ```
 
-### Sentence Analysis
-endpoint-name: `/analyse-sentence`
+### Profiling Sentences
+endpoint-name: `/profile-sentence`
 method: `POST`
 
 input: schema -> `Text`
