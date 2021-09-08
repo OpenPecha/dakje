@@ -9,9 +9,16 @@
       :title="$t('Toggle Menu')"
       @click="$emit('toggleMenu')"
     />
-    <q-separator class="q-ml-md" vertical inset />
+    <q-separator class="q-mr-md" vertical inset />
 
-    <q-btn dense flat rouned icon="content_cut" @click="tokenize" />
+    <q-btn
+      dense
+      flat
+      rouned
+      :title="$t('Analyze Text')"
+      icon="insert_chart_outlined"
+      @click="profile"
+    />
   </q-toolbar>
 </template>
 
@@ -29,8 +36,8 @@ export default {
   },
 
   methods: {
-    tokenize() {
-      this.$store.dispatch("editor/tokenizeContent");
+    profile() {
+      this.$store.dispatch("editor/profileContent");
     },
   },
 };

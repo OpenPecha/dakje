@@ -9,13 +9,13 @@ export function setFilename(state, filename) {
     LocalStorage.set(FILENAME_CACHE_KEY, filename)
 }
 
-export function setContentHTML(state, html) {
-    state.contentHTML = html || ''
-    LocalStorage.set(CONTENT_CACHE_KEY, html)
+export function setContentHTML(state, content) {
+    state.content = content || ''
+    LocalStorage.set(CONTENT_CACHE_KEY, content)
 }
 
 export function saveContentHTML(state, html) {
-    LocalStorage.set(CONTENT_LAST_SAVE_CACHE_KEY, state.contentHTML)
+    LocalStorage.set(CONTENT_LAST_SAVE_CACHE_KEY, state.content)
 }
 
 export function setLastSave(state, lastSave) {
@@ -26,4 +26,13 @@ export function setLastSave(state, lastSave) {
 
 export function setLastChange(state, lastChange) {
     state.lastChange = lastChange
+}
+
+export function setContentTokens(state, tokens) {
+    state.contentTokens = tokens
+}
+
+export function toggleProfileMode(state) {
+    const value = !state.profileModeOn
+    state.profileModeOn = value
 }

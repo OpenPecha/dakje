@@ -1,8 +1,12 @@
 export default function () {
   return {
     filename: '',
-    contentHTML: '',
+    content: '',
     lastSave: null,
     lastChange: null,
+    vocabStatistic: null,
+    sentenceStatistic: null,
+    contentTokens: [],
+    profileModeOn: false,
   }
 }

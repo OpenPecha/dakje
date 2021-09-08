@@ -1,21 +1,26 @@
 <template>
   <div :class="classNames">
-    <editor-content :editor="editor" />
+    <div v-show="!profileModeOn" class="ProseMirror" contenteditable @input="onInput">
+      {{ content }}
+    </div>
+    <div v-show="profileModeOn" class="ProseMirror" contenteditable>
+      <Token v-for="(token, idx) in contentTokens" :key="idx" :token="token" />
+    </div>
   </div>
 </template>
 
 <script>
-import { Editor, EditorContent } from "@tiptap/vue-3";
-import StarterKit from "@tiptap/starter-kit";
-
 import { LocalStorage } from "quasar";
 import { CONTENT_CACHE_KEY } from "../config";
+import { mapState } from "vuex";
+
+import Token from "components/Token";
 
 export default {
   name: "Editor",
 
   components: {
-    EditorContent,
+    Token,
   },
 
   data() {
@@ -25,42 +30,22 @@ export default {
   },
 
   computed: {
+    ...mapState("editor", ["content", "contentTokens", "profileModeOn"]),
+
     classNames() {
       return {
         editor: true,
       };
     },
   },
-  watch: {
-    "$store.state.editor.contentHTML": function (val) {
-      this.setContent(val);
-    },
-  },
-
-  mounted() {
-    const html = LocalStorage.getItem(CONTENT_CACHE_KEY);
-    this.$store.dispatch("editor/updateContent", html);
-    const finalizeContent = this.finalizeContent;
-    const store = this.$store;
-    this.editor = new Editor({
-      extensions: [StarterKit],
-      content: html,
-      onUpdate({ editor }) {
-        const html = editor.getHTML();
-        const content = finalizeContent(html);
-        console.log(content);
-        store.dispatch("editor/updateContent", content);
-      },
-    });
-  },
-
-  beforeUnmount() {
-    this.editor.destroy();
-  },
-
   methods: {
+    onInput(event) {
+      console.log(event.target.innerText);
+      this.$store.dispatch("editor/updateContent", event.target.innerText);
+    },
+
     focus() {
-      this.editor.commands.focus();
+      // this.editor.commands.focus();
     },
 
     setContent(content) {
@@ -97,6 +82,10 @@ export default {
 
   &:focus {
     outline: none;
+  }
+
+  & >>> span {
+    margin-left: 10px;
   }
 
   @media print {
