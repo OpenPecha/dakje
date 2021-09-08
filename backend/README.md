@@ -18,11 +18,18 @@ input: schema -> `Text`
 ```
 
 output: -> schema -> `list[Token]`
-```json
+```python
 [
-    {
+    {                             # Token
       "form": "dakje",
-      "pos": "NOUN"
+      "pos": "NOUN",
+      "levels": [
+         {                        # VocabLevel
+            "type": "general",
+            "label": "A0"
+         },
+         ...
+      ]
     },
     ...
 ]
