@@ -1,4 +1,4 @@
-# Tibetan Spellchecker
+# Dakje
 Providing Tibetan spell checking service initiated by project [WikiLoop](https://meta.wikimedia.org/wiki/WikiLoop) -- [Tibetan Initiative](https://meta.wikimedia.org/wiki/WikiLoop/TibetanInitiative).
 
 [![CI](https://github.com/10zinten/tibetan-spellchecker/actions/workflows/CI.yml/badge.svg)](https://github.com/10zinten/tibetan-spellchecker/actions/workflows/CI.yml)
