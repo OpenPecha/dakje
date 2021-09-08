@@ -44,8 +44,8 @@ output: schema -> `List[Sentence]`
 [
     {
       "content": "sentence text",
-      "sentence_length": 10,
-      "verb_per_sentence": 2,
+      "length": 10,
+      "verbs": 2,
       "span": {
         "start": 5,
         "end": 20
