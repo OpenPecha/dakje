@@ -51,7 +51,7 @@ output: -> schema -> `list[Token]`
             ],
         }
     }
-      
+}     
 ```
 
 ### Profiling Sentences
