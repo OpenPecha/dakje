@@ -4,7 +4,7 @@
       {{ content }}
     </div>
     <div v-show="profileModeOn" class="ProseMirror" contenteditable>
-      <Token v-for="(token, idx) in contentTokens" :key="idx" :token="token" />
+      <Word v-for="(word, idx) in contentWords" :key="idx" :word="word" />
     </div>
   </div>
 </template>
@@ -12,13 +12,13 @@
 <script>
 import { mapState } from "vuex";
 
-import Token from "components/Token";
+import Word from "components/Word";
 
 export default {
   name: "Editor",
 
   components: {
-    Token,
+    Word,
   },
 
   data() {
@@ -29,7 +29,7 @@ export default {
 
   computed: {
     ...mapState("editor", ["content"]),
-    ...mapState("profiler", ["contentTokens", "profileModeOn"]),
+    ...mapState("profiler", ["contentWords", "profileModeOn"]),
 
     classNames() {
       return {
@@ -78,10 +78,12 @@ export default {
 
 .ProseMirror {
   max-width: 700px;
+  height: 85vh;
   margin: 0 auto;
   padding: 0 1.5rem;
-  font-size: 1rem;
-  line-height: 1.75em;
+  font-size: 1.5rem;
+  line-height: 1.5em;
+  overflow: auto;
 
   &:focus {
     outline: none;

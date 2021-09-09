@@ -37,7 +37,7 @@ export default {
 
   methods: {
     profile() {
-      this.$store.dispatch("profiler/profileContent");
+      this.$store.dispatch("profiler/tokenizeContent");
     },
   },
 };

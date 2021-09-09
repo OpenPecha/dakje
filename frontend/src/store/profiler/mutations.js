@@ -1,5 +1,10 @@
-export function setContentTokens(state, tokens) {
-    state.contentTokens = tokens
+
+export function setContentWords(state, words) {
+    state.contentWords = words
+}
+
+export function setContentSentences(state, sentences) {
+    state.contentSentences = sentences
 }
 
 export function toggleProfileMode(state, payload) {
@@ -8,7 +13,6 @@ export function toggleProfileMode(state, payload) {
 
 export function setWordLists(state, wordLists) {
     state.wordLists = wordLists
-    console.log(state.wordLists)
 }
 
 export function loadLevelList(state, wordListName) {
@@ -17,4 +21,20 @@ export function loadLevelList(state, wordListName) {
 
 export function setLevelListWords(state, {wordListName, levelIdx, words}) {
     state.wordLists[wordListName].levelLists[levelIdx].words = words
+}
+
+export function incrementVocabHit(state, {wordListName, levelIdx}) {
+    state.wordLists[wordListName].levelLists[levelIdx].count++
+}
+
+export function setLevelWordsLoaded(state, payload) {
+    state.levelWordsLoaded = payload
+}
+
+export function setVocabStatistic(state, statistic) {
+    state.vocabStatistic = statistic
+}
+
+export function setLevelColor(state, {wordIdx, color}) {
+    state.contentWords[wordIdx].color = color
 }

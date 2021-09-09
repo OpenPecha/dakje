@@ -26,14 +26,22 @@
         </div>
       </div>
     </div>
+
+    <ProfilerDashboardLevelsTable class="q-mt-md" style="width: 60%" />
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
+import ProfilerDashboardLevelsTable from "components/ProfilerDashboardLevelsTable";
 
 export default {
   name: "ProfilerDashboard",
+
+  components: {
+    ProfilerDashboardLevelsTable,
+  },
+
   data() {
     return {
       selectedWordList: "",
@@ -52,7 +60,17 @@ export default {
   async created() {
     this.wordListsNames = Object.getOwnPropertyNames(this.wordLists);
     this.selectedWordList = this.wordListsNames[0];
-    this.$store.dispatch("profiler/loadLevelLists", this.selectedWordList);
+    await this.loadLevelLists(this.selectedWordList);
+    await this.profileContent(this.selectedWordList);
+    await this.computeVocabStatistic(this.selectedWordList);
+  },
+
+  methods: {
+    ...mapActions("profiler", [
+      "loadLevelLists",
+      "profileContent",
+      "computeVocabStatistic",
+    ]),
   },
 };
 </script>

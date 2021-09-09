@@ -3,7 +3,9 @@ export default function () {
     wordLists: null,
     vocabStatistic: null,
     sentenceStatistic: null,
-    contentTokens: [],
+    contentWords: [],
+    contentSentences: [],
     profileModeOn: false,
+    levelWordsLoaded: false,
   }
 }

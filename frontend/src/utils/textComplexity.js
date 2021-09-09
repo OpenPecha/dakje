@@ -45,8 +45,8 @@ class LevelList {
         this.label = label
         this.color = color
         this.words = []
-        this.hits = 0
-        this.miss = 0
+        this.count = 0
+        this.percent = 0
     }
 
     async loadWords() {
@@ -56,6 +56,8 @@ class WordList {
     constructor(url) {
         this.url = url
         this.levelLists = []
+        this.totalHit = 0
+        this.totalMiss = 0
         this.init()
     }
 
