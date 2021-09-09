@@ -37,7 +37,7 @@ export default {
 
   methods: {
     profile() {
-      this.$store.dispatch("editor/profileContent");
+      this.$store.dispatch("profiler/profileContent");
     },
   },
 };

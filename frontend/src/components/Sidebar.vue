@@ -1,5 +1,5 @@
 <template>
-  <q-list class="text-uppercase">
+  <q-list>
     <q-item header>
       <q-item-section avatar>
         <q-avatar class="full-width text-center">
@@ -10,6 +10,9 @@
             @click="$emit('about')"
           />
         </q-avatar>
+      </q-item-section>
+      <q-item-section>
+        <q-item-label class="text-h4">Dakje</q-item-label>
       </q-item-section>
     </q-item>
     <q-separator />
@@ -46,6 +49,7 @@
       v-ripple
       clickable
       :title="$t('Save to destination')"
+      disable
       @click="$emit('saveFileAs')"
     >
       <q-item-section avatar>
@@ -60,6 +64,7 @@
       v-ripple
       clickable
       :title="$t('Import from other formats')"
+      disable
       @click="$emit('importFile')"
     >
       <q-item-section avatar>
@@ -73,6 +78,7 @@
       v-ripple
       clickable
       :title="$t('Export to another format')"
+      disable
       @click="$emit('exportFileAs')"
     >
       <q-item-section avatar>
@@ -82,7 +88,13 @@
         <q-item-label>{{ $t("Export") }}</q-item-label>
       </q-item-section>
     </q-item>
-    <q-item v-ripple clickable :title="$t('Print your work')" @click="$emit('printFile')">
+    <q-item
+      v-ripple
+      clickable
+      disable
+      :title="$t('Print your work')"
+      @click="$emit('printFile')"
+    >
       <q-item-section avatar>
         <q-icon name="print" />
       </q-item-section>
@@ -95,6 +107,7 @@
       v-ripple
       clickable
       :title="$t('Adjust to your taste')"
+      disable
       @click="$emit('settings')"
     >
       <q-item-section avatar>
@@ -109,6 +122,7 @@
       v-if="$q.platform.is.electron"
       v-ripple
       clickable
+      disable
       :title="$t('Close the application')"
       @click="$emit('exit')"
     >

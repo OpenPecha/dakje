@@ -2,7 +2,7 @@ import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
 import base from "./base"
 import editor from "./editor"
-
+import profiler from './profiler'
 // import example from './module-example'
 
 /*
@@ -19,6 +19,7 @@ export default store(function (/* { ssrContext } */) {
     modules: {
         base,
         editor,
+        profiler,
     },
 
     // enable strict mode (adds overhead!)

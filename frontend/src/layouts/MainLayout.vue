@@ -8,6 +8,7 @@
       v-model="menuOpen"
       mini-to-overlay
       bordered
+      :width="200"
       :mini="menuMini"
       @mouseover="menuMini = false"
       @mouseout="menuMini = true"

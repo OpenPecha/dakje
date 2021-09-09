@@ -27,12 +27,3 @@ export function setLastSave(state, lastSave) {
 export function setLastChange(state, lastChange) {
     state.lastChange = lastChange
 }
-
-export function setContentTokens(state, tokens) {
-    state.contentTokens = tokens
-}
-
-export function toggleProfileMode(state) {
-    const value = !state.profileModeOn
-    state.profileModeOn = value
-}

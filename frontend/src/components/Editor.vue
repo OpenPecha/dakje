@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import { LocalStorage } from "quasar";
-import { CONTENT_CACHE_KEY } from "../config";
 import { mapState } from "vuex";
 
 import Token from "components/Token";
@@ -30,7 +28,8 @@ export default {
   },
 
   computed: {
-    ...mapState("editor", ["content", "contentTokens", "profileModeOn"]),
+    ...mapState("editor", ["content"]),
+    ...mapState("profiler", ["contentTokens", "profileModeOn"]),
 
     classNames() {
       return {
@@ -38,9 +37,12 @@ export default {
       };
     },
   },
+
+  created() {
+    this.$store.dispatch("profiler/setupWordLists");
+  },
   methods: {
     onInput(event) {
-      console.log(event.target.innerText);
       this.$store.dispatch("editor/updateContent", event.target.innerText);
     },
 
