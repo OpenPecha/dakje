@@ -41,6 +41,7 @@ export default {
   created() {
     this.$store.dispatch("profiler/setupWordLists");
   },
+
   methods: {
     onInput(event) {
       this.$store.dispatch("editor/updateContent", event.target.innerText);

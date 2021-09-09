@@ -30,20 +30,26 @@ export class SentenceProfiler {
     }
 }
 
-function b64_to_utf8(str) {
-    return decodeURIComponent(escape(window.atob(str)));
-}
+
+const LevelColors = [
+    "maroon",
+    "green",
+    "navy",
+    "cornflowerblue",
+    "chocolate",
+    "dodgerblue"
+]
 class LevelList {
-    constructor(url, label) {
+    constructor(url, label, color) {
         this.url = url
         this.label = label
+        this.color = color
         this.words = []
+        this.hits = 0
+        this.miss = 0
     }
 
     async loadWords() {
-        const response = await axios.get(this.url)
-        const content = b64_to_utf8(response.data.content)
-        this.words = content.split("\r\n")
     }
 }
 class WordList {
@@ -55,16 +61,15 @@ class WordList {
 
     async init() {
       const response = await axios.get(this.url)
-      response.data.forEach((levelFile) => {
+      response.data.forEach((levelFile, i) => {
           const levelLabel = levelFile.name.replace(".txt", "")
-          this.levelLists.push(new LevelList(levelFile.url, levelLabel))
+          const levelList = new LevelList(levelFile.url, levelLabel, LevelColors[i])
+          this.levelLists.push(levelList)
       })
-    }
 
-    async loadLevels() {
-        this.levelLists.forEach((level) => {
-            level.loadWords()
-        })
+      // add unlisted level
+      const unListedLevel = new LevelList("", "Unlisted", "black")
+      this.levelLists.push(unListedLevel)
     }
 }
 export class WordLists {
@@ -73,6 +78,7 @@ export class WordLists {
         this.wordLists = {}
         this.init()
     }
+
     async init() {
       const response = await axios.get(this.url)
       response.data.forEach((content) => {
