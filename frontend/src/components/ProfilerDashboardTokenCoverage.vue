@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div>Token Coverage</div>
-    <div class="container row">
-      <div class="coverage" :style="{ width: `${totalHitPercent}%` }"></div>
-      <div class="q-ml-sm">
+    <div class="text-h6">Token Coverage</div>
+    <div class="container">
+      <div class="coverage" :style="{ width: `${totalHitPercent}%` }">
         {{ totalHitPercent + "%" }}
       </div>
     </div>
@@ -30,14 +29,14 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  width: 100%;
-  padding: 0;
-  margin: 0;
   border: 1px solid gray;
 
   & .coverage {
-    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 24px;
+    color: white;
     background-color: green;
   }
 }

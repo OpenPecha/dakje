@@ -30,6 +30,8 @@
     <ProfilerDashboardTokenCoverage class="q-mt-md" style="width: 60%" />
 
     <ProfilerDashboardLevelsTable class="q-mt-md" style="width: 60%" />
+
+    <ProfilerDashboardSentenceStatistic class="q-mt-md" style="width: 60%" />
   </div>
 </template>
 
@@ -37,12 +39,15 @@
 import { mapState, mapActions } from "vuex";
 import ProfilerDashboardLevelsTable from "components/ProfilerDashboardLevelsTable";
 import ProfilerDashboardTokenCoverage from "components/ProfilerDashboardTokenCoverage";
+import ProfilerDashboardSentenceStatistic from "components/ProfilerDashboardSentenceStatistic";
+
 export default {
   name: "ProfilerDashboard",
 
   components: {
     ProfilerDashboardLevelsTable,
     ProfilerDashboardTokenCoverage,
+    ProfilerDashboardSentenceStatistic,
   },
 
   data() {
