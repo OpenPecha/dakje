@@ -82,8 +82,8 @@ export default {
   margin: 0 auto;
   padding: 0 1.5rem;
   font-size: 1.5rem;
-  line-height: 1.5em;
   overflow: auto;
+  font-family: "Monlam Uni Ochan2";
 
   &:focus {
     outline: none;

@@ -35,6 +35,10 @@ export function setVocabStatistic(state, statistic) {
     state.vocabStatistic = statistic
 }
 
+export function resetVocabStatistic(state) {
+    state.vocabStatistic = {}
+}
+
 export function setLevelColor(state, {wordIdx, color}) {
     state.contentWords[wordIdx].color = color
 }

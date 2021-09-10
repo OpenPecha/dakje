@@ -27,6 +27,8 @@
       </div>
     </div>
 
+    <ProfilerDashboardTokenCoverage class="q-mt-md" style="width: 60%" />
+
     <ProfilerDashboardLevelsTable class="q-mt-md" style="width: 60%" />
   </div>
 </template>
@@ -34,12 +36,13 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import ProfilerDashboardLevelsTable from "components/ProfilerDashboardLevelsTable";
-
+import ProfilerDashboardTokenCoverage from "components/ProfilerDashboardTokenCoverage";
 export default {
   name: "ProfilerDashboard",
 
   components: {
     ProfilerDashboardLevelsTable,
+    ProfilerDashboardTokenCoverage,
   },
 
   data() {
@@ -57,12 +60,18 @@ export default {
     },
   },
 
+  watch: {
+    async selectedWordList(val) {
+      this.$store.commit("profiler/resetVocabStatistic");
+      await this.loadLevelLists(val);
+      await this.profileContent(val);
+      await this.computeVocabStatistic(val);
+    },
+  },
+
   async created() {
     this.wordListsNames = Object.getOwnPropertyNames(this.wordLists);
     this.selectedWordList = this.wordListsNames[0];
-    await this.loadLevelLists(this.selectedWordList);
-    await this.profileContent(this.selectedWordList);
-    await this.computeVocabStatistic(this.selectedWordList);
   },
 
   methods: {
