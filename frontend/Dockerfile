@@ -10,6 +10,8 @@ COPY . .
 FROM develop-stage as build-stage
 RUN yarn
 
+ARG API_URL
+
 RUN quasar build
 
 # production stage

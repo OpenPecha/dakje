@@ -91,6 +91,8 @@ services:
 
   frontend:
     image: '${DOCKER_IMAGE_FRONTEND?Variable not set}:${TAG-latest}'
+    env_file:
+      - .env
     build:
       context: ./frontend
       args:

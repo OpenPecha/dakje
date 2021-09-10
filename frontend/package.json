@@ -2,8 +2,8 @@
   "name": "frontend",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
-  "productName": "Tibetan SpellChecker",
-  "author": "Anan <mengan.wang@gmail.com>",
+  "productName": "Dakje",
+  "author": "",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",

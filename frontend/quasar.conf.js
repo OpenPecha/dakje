@@ -65,6 +65,10 @@ module.exports = configure(function (ctx) {
       // Options below are automatically set depending on the env, set them if you want to override
       // extractCSS: false,
 
+      env: {
+        API_URL: process.env.API_URL
+      },
+
       // https://v2.quasar.dev/quasar-cli/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
       chainWebpack (chain) {
@@ -142,8 +146,8 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: `Tibetan SpellChecker`,
-        short_name: `Tibetan SpellChecker`,
+        name: `Dakje`,
+        short_name: `Dakje`,
         description: `A Quasar Framework app`,
         display: 'standalone',
         orientation: 'portrait',
