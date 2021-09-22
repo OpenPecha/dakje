@@ -11,7 +11,6 @@ fastapi = "^0.68.1"
 botok = "^0.8.7"
 
 [tool.poetry.dev-dependencies]
-black = "^21.8b0"
 isort = "^5.9.3"
 pytest = "^6.2.5"
 pytest-cov = "^2.12.1"
