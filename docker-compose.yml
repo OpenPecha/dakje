@@ -97,6 +97,7 @@ services:
       context: ./frontend
       args:
         FRONTEND_ENV: ${FRONTEND_ENV-production}
+        API_URL: ${API_URL}
     deploy:
       labels:
         - traefik.enable=true

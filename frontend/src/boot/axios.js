@@ -8,7 +8,7 @@ import { boot } from 'quasar/wrappers'
 // "export default () => {}" function below (which runs individually
 // for each client)
 const api = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ?  process.env.API_URL : "http://localhost/api"
+  baseURL: process.env.API_URL
 })
 
 export default boot(({ app }) => {
