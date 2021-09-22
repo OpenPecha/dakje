@@ -20,6 +20,14 @@ services:
       - --accesslog
       # Enable the Traefik log, for configurations and errors
       - --log
+    labels:
+      # Enable Traefik for this service, to make it available in the public network
+      - traefik.enable=true
+      # traefik-http set up only to use the middleware to redirect to https
+      # Uses the environment variable DOMAIN
+      - traefik.http.routers.traefik-public-http.rule=Host(`${DOMAIN?Variable not set}`)
+      - traefik.http.routers.traefik-public-http.entrypoints=http
+
     networks:
       # Use the public network created to be shared between Traefik and
       # any other service that needs to be publicly available with HTTPS
