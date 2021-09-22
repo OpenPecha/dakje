@@ -14,7 +14,7 @@ services:
       dockerfile: backend.dockerfile
       args:
         INSTALL_DEV: ${INSTALL_DEV-false}
-    restarts: always
+    restart: always
     labels:
       # Enable Traefik for this specific "backend" service
       - traefik.enable=true
@@ -35,7 +35,7 @@ services:
       args:
         FRONTEND_ENV: ${FRONTEND_ENV-production}
         API_URL: ${API_URL}
-    restarts: always
+    restart: always
     labels:
       # Enable Traefik for this specific "backend" service
       - traefik.enable=true
