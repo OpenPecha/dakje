@@ -89,10 +89,6 @@ export default {
     outline: none;
   }
 
-  & >>> span {
-    margin-left: 10px;
-  }
-
   @media print {
     font-size: 0.8rem;
     max-width: 100%;
