@@ -4,7 +4,7 @@
       {{ content }}
     </div>
     <div v-show="profileModeOn" class="ProseMirror" contenteditable>
-      <Word v-for="(word, idx) in contentWords" :key="idx" :word="word" />
+      <Word v-for="(word, idx) in contentWordsLevel" :key="idx" :word="word" />
     </div>
   </div>
 </template>
@@ -29,7 +29,7 @@ export default {
 
   computed: {
     ...mapState("editor", ["content"]),
-    ...mapState("profiler", ["contentWords", "profileModeOn"]),
+    ...mapState("profiler", ["contentWordsLevel", "profileModeOn"]),
 
     classNames() {
       return {

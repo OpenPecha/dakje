@@ -34,6 +34,11 @@ export default {
 
   watch: {
     "$store.state.profiler.vocabStatistic": function (val) {
+      this.columns = [];
+      if (!val.levels) {
+        return;
+      }
+
       Object.keys(val.levels).map((levelLabel, idx) => {
         const level = val.levels[levelLabel];
         this.columns.push({

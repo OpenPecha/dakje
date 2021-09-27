@@ -39,6 +39,10 @@ export function resetVocabStatistic(state) {
     state.vocabStatistic = {}
 }
 
-export function setLevelColor(state, {wordIdx, color}) {
-    state.contentWords[wordIdx].color = color
+export function resetContentWordsLevel (state) {
+    state.contentWordsLevel = []
+}
+
+export function appendWordToContentWordsLevel(state, word) {
+    state.contentWordsLevel.push(word)
 }

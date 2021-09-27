@@ -52,14 +52,31 @@ export function computeVocabStatistic({ state, commit, getters }, wordListName) 
   commit("setVocabStatistic", statistic);
 }
 
-export async function profileContent({ state, commit, dispatch }, wordListName) {
+function inLevelList(word, list) {
+  const lastChar = word.form.at(-1)
+  if (lastChar === "་" || lastChar === "།") {
+    const cleanedWord = word.form.slice(0, -1)
+    return list.includes(cleanedWord)
+  } else {
+    return list.includes(word.form)
+  }
+}
+
+export async function profileContent({ state, commit}, wordListName) {
+  commit("resetContentWordsLevel")
   for (var wordIdx = 0; wordIdx < state.contentWords.length; wordIdx++) {
     const word = state.contentWords[wordIdx]
+    var isFound = false
     state.wordLists[wordListName].levelLists.forEach((level, i) => {
-      if (level.words.includes(word.form)) {
+      if (inLevelList(word, level.words)) {
+        isFound = true
         commit("incrementVocabHit", { wordListName, levelIdx: i });
-        commit("setLevelColor", {wordIdx, color: level.color})
+        commit("appendWordToContentWordsLevel", {...word, color: level.color})
       }
     });
+
+    if (!isFound) {
+        commit("appendWordToContentWordsLevel", {...word, color: "black"})
+    }
   }
 }

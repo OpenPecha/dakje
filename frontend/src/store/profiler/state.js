@@ -4,6 +4,7 @@ export default function () {
     vocabStatistic: null,
     sentenceStatistic: null,
     contentWords: [],
+    contentWordsLevel: [],
     contentSentences: [],
     profileModeOn: false,
     levelWordsLoaded: false,
