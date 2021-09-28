@@ -1,0 +1,32 @@
+
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+     
+  deploy:
+#     needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          envs: SHA
+          script_stop: true
+          script: |
+            cd dakje
+            git checkout main
+            git pull origin main
+            docker-compose -f docker-compose.yml up --build -d
+            docker system prune -af
