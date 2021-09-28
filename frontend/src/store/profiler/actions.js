@@ -1,4 +1,5 @@
 import { api, axios } from "boot/axios";
+import { Loading } from "quasar";
 import { WordLists } from "src/utils/textComplexity";
 
 export async function setupWordLists({ commit, state }) {
@@ -26,6 +27,7 @@ export async function loadLevelLists({ state, commit, dispatch }, wordListName) 
 }
 
 export function tokenizeContent({ rootState, commit }) {
+  Loading.show()
   api.post("/token", { content: rootState.editor.content }).then((response) => {
     commit("setContentWords", response.data);
     commit("toggleProfileMode", true);
@@ -33,6 +35,7 @@ export function tokenizeContent({ rootState, commit }) {
 
   api.post("/sentence", { content: rootState.editor.content }).then((response) => {
     commit("setContentSentences", response.data);
+    Loading.hide()
   });
 }
 
@@ -63,6 +66,7 @@ function inLevelList(word, list) {
 }
 
 export async function profileContent({ state, commit}, wordListName) {
+  Loading.show()
   commit("resetContentWordsLevel")
   for (var wordIdx = 0; wordIdx < state.contentWords.length; wordIdx++) {
     const word = state.contentWords[wordIdx]
@@ -79,4 +83,6 @@ export async function profileContent({ state, commit}, wordListName) {
         commit("appendWordToContentWordsLevel", {...word, color: "black"})
     }
   }
+
+  Loading.hide()
 }
