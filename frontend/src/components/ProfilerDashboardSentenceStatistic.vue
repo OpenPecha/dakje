@@ -8,7 +8,7 @@
       </div>
       <div>
         <span class="text-weight-light">Average sentence length:</span>
-        {{ avgSentenceLength }}
+        {{ avgSentenceLength }} words
       </div>
     </div>
   </div>
