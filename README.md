@@ -3,7 +3,7 @@ Providing Tibetan spell checking service initiated by project [WikiLoop](https:/
 
 [![CI](https://github.com/10zinten/tibetan-spellchecker/actions/workflows/CI.yml/badge.svg)](https://github.com/10zinten/tibetan-spellchecker/actions/workflows/CI.yml)
 
-Click [here for Dakje Desktop](https://github.com/Esukhia/dakje-desktop)  
+Link to [✒️ Dakje Desktop](https://github.com/Esukhia/dakje-desktop)  
 
 ## Backend
 ### Requirement
