@@ -98,4 +98,10 @@ export default {
     }
   }
 }
+
+div[contenteditable]:empty:focus::before,
+div[contenteditable]:empty::before {
+  content: "Type or paste your text here";
+  color: #888888;
+}
 </style>
