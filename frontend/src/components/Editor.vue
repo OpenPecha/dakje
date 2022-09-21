@@ -3,7 +3,7 @@
     <div v-show="!profileModeOn" class="ProseMirror" contenteditable @input="onInput">
       {{ content }}
     </div>
-    <div v-show="profileModeOn" class="ProseMirror" contenteditable>
+    <div v-show="profileModeOn" class="ProseMirror">
       <Word v-for="(word, idx) in contentWordsLevel" :key="idx" :word="word" />
     </div>
   </div>
