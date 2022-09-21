@@ -15,8 +15,17 @@
       dense
       flat
       rouned
+      :title="$t('Editor')"
+      icon="text_fields"
+      @click="toggleToEditorMode"
+    />
+
+    <q-btn
+      dense
+      flat
+      rouned
       :title="$t('Analyze Text')"
-      icon="insert_chart_outlined"
+      icon="psychology"
       @click="profile"
     />
   </q-toolbar>
@@ -38,6 +47,10 @@ export default {
   methods: {
     profile() {
       this.$store.dispatch("profiler/tokenizeContent");
+    },
+
+    toggleToEditorMode() {
+      this.$store.commit("profiler/toggleProfileMode");
     },
   },
 };
