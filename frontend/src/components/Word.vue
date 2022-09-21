@@ -1,6 +1,5 @@
 <template>
-  <span :style="{ color: word.color }">{{ word.form }}</span
-  ><span style="width: 1.2rem">{{ "      " }}</span>
+  <span :style="{ color: word.color, 'margin-right': '1.2rem' }">{{ word.form }}</span>
 </template>
 
 <script>
