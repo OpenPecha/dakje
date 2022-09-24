@@ -15,6 +15,7 @@ function b64_to_utf8(str) {
 
 export async function loadLevelLists({ state, commit, dispatch }, wordListName) {
   console.log("loadLevelLists");
+  Loading.show()
   const levelList = state.wordLists[wordListName].levelLists;
   for (var i = 0; i < levelList.length; i++) {
     const levelList = state.wordLists[wordListName].levelLists[i];
