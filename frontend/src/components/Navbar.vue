@@ -9,10 +9,9 @@
       :title="$t('Toggle Menu')"
       @click="$emit('toggleMenu')"
     />
-    <q-separator class="q-mr-md" vertical inset />
 
     <q-btn
-      dense
+      v-show="profileModeOn"
       flat
       rouned
       :title="$t('Editor')"
@@ -21,7 +20,7 @@
     />
 
     <q-btn
-      dense
+      v-show="!profileModeOn"
       flat
       rouned
       :title="$t('Analyze Text')"
@@ -32,11 +31,14 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "Navbar",
   emits: ["toggleMenu"],
 
   computed: {
+    ...mapState("profiler", ["contentWordsLevel", "profileModeOn"]),
     className() {
       return this.$q.dark.isActive
         ? "bg-dark-page text-grey-6 shadow-dark-page"
