@@ -33,8 +33,8 @@
 </template>
 
 <script>
-import { importFile } from "src/utils/loadfile";
 import { extractHTMLContent } from "src/utils/conversion";
+import { importFile } from "src/utils/loadfile";
 
 import Navbar from "components/Navbar.vue";
 import Sidebar from "components/Sidebar.vue";
@@ -49,7 +49,7 @@ export default {
 
   data() {
     return {
-      menuMini: true,
+      menuMini: false,
     };
   },
 
