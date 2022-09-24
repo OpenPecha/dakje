@@ -49,6 +49,11 @@ class LevelList {
         this.percent = 0
     }
 
+    async reset() {
+        this.count = 0
+        this.percent = 0
+    }
+
     async loadWords() {
     }
 }

@@ -1,6 +1,5 @@
 <template>
-  <div v-show="isReady">
-    {{ vocabStatistic.length }}
+  <div v-if="vocabStatistic">
     <div class="row q-gutter-lg">
       <div class="col-3">
         <div>Word list:</div>
@@ -34,7 +33,6 @@
 
     <ProfilerDashboardSentenceStatistic class="q-mt-md" style="width: 60%" />
   </div>
-
 </template>
 
 <script>
@@ -65,15 +63,10 @@ export default {
     selectedWordListLevels() {
       return this.wordLists[this.selectedWordList].levelLists;
     },
-
-    isReady() {
-      return Object.keys(this.vocabStatistic).length > 0
-    },
   },
 
   watch: {
     async selectedWordList(val) {
-      this.$store.commit("profiler/resetVocabStatistic");
       await this.loadLevelLists(val);
       await this.profileContent(val);
       await this.computeVocabStatistic(val);

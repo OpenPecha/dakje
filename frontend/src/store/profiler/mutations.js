@@ -35,8 +35,15 @@ export function setVocabStatistic(state, statistic) {
     state.vocabStatistic = statistic
 }
 
-export function resetVocabStatistic(state) {
+export function resetVocabStatistic(state, wordListName) {
+    console.log("resetVocabStatistic");
     state.vocabStatistic = {}
+    if (wordListName in state.wordLists) {
+        console.log("resetVocabStatistic", wordListName);
+        state.wordLists[wordListName].levelLists.forEach((level) => {
+                level.reset()
+        });
+    }
 }
 
 export function resetContentWordsLevel (state) {

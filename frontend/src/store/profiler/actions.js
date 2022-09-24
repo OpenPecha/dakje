@@ -14,6 +14,7 @@ function b64_to_utf8(str) {
 }
 
 export async function loadLevelLists({ state, commit, dispatch }, wordListName) {
+  console.log("loadLevelLists");
   const levelList = state.wordLists[wordListName].levelLists;
   for (var i = 0; i < levelList.length; i++) {
     const levelList = state.wordLists[wordListName].levelLists[i];
@@ -27,6 +28,7 @@ export async function loadLevelLists({ state, commit, dispatch }, wordListName) 
 }
 
 export function tokenizeContent({ rootState, commit }) {
+  console.log("tokenizeContent");
   Loading.show()
   api.post("/token", { content: rootState.editor.content }).then((response) => {
     commit("setContentWords", response.data);
@@ -35,11 +37,11 @@ export function tokenizeContent({ rootState, commit }) {
 
   api.post("/sentence", { content: rootState.editor.content }).then((response) => {
     commit("setContentSentences", response.data);
-    Loading.hide()
   });
 }
 
 export function computeVocabStatistic({ state, commit, getters }, wordListName) {
+  console.log("computeVocabStatistic");
   const statistic = { totalHit: 0, totalMiss: 0, levels: {} };
   state.wordLists[wordListName].levelLists.forEach((level) => {
     statistic.levels[level.label] = {
@@ -53,6 +55,8 @@ export function computeVocabStatistic({ state, commit, getters }, wordListName) 
   statistic.levels["Unlisted"].count = statistic.totalMiss,
   statistic.levels["Unlisted"].percent = ((statistic.totalMiss / getters.totalWords) * 100).toFixed(1),
   commit("setVocabStatistic", statistic);
+  console.log("computeVocabStatistic", state.vocabStatistic)
+  Loading.hide()
 }
 
 function inLevelList(word, list) {
@@ -66,8 +70,10 @@ function inLevelList(word, list) {
 }
 
 export async function profileContent({ state, commit}, wordListName) {
+  console.log("profileContent");
   Loading.show()
   commit("resetContentWordsLevel")
+  commit("resetVocabStatistic", wordListName)
   for (var wordIdx = 0; wordIdx < state.contentWords.length; wordIdx++) {
     const word = state.contentWords[wordIdx]
     var isFound = false
@@ -83,6 +89,4 @@ export async function profileContent({ state, commit}, wordListName) {
         commit("appendWordToContentWordsLevel", {...word, color: "black"})
     }
   }
-
-  Loading.hide()
 }
