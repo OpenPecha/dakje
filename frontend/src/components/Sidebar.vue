@@ -26,6 +26,7 @@
     </q-item>
     <q-item
       v-ripple
+      disable
       clickable
       :title="$t('Open an existing file')"
       @click="$emit('openFile')"
@@ -37,7 +38,9 @@
         <q-item-label>{{ $t("Open") }}</q-item-label>
       </q-item-section>
     </q-item>
-    <q-item v-ripple clickable :title="$t('Save your work')" @click="$emit('saveFile')">
+    <q-item
+      v-ripple
+      clickable :title="$t('Save your work')" @click="$emit('saveFile')">
       <q-item-section avatar>
         <q-icon name="save" />
       </q-item-section>
