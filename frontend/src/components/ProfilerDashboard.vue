@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div v-show="isReady">
+    {{ vocabStatistic.length }}
     <div class="row q-gutter-lg">
       <div class="col-3">
         <div>Word list:</div>
@@ -33,13 +34,14 @@
 
     <ProfilerDashboardSentenceStatistic class="q-mt-md" style="width: 60%" />
   </div>
+
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
 import ProfilerDashboardLevelsTable from "components/ProfilerDashboardLevelsTable";
-import ProfilerDashboardTokenCoverage from "components/ProfilerDashboardTokenCoverage";
 import ProfilerDashboardSentenceStatistic from "components/ProfilerDashboardSentenceStatistic";
+import ProfilerDashboardTokenCoverage from "components/ProfilerDashboardTokenCoverage";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "ProfilerDashboard",
@@ -58,10 +60,14 @@ export default {
   },
 
   computed: {
-    ...mapState("profiler", ["wordLists"]),
+    ...mapState("profiler", ["wordLists", "vocabStatistic"]),
 
     selectedWordListLevels() {
       return this.wordLists[this.selectedWordList].levelLists;
+    },
+
+    isReady() {
+      return Object.keys(this.vocabStatistic).length > 0
     },
   },
 
