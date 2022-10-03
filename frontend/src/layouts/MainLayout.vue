@@ -50,18 +50,8 @@ export default {
   data() {
     return {
       menuMini: false,
+      menuOpen: false,
     };
-  },
-
-  computed: {
-    menuOpen: {
-      get() {
-        return this.$store.state.base.menuOpen;
-      },
-      set() {
-        this.$store.commit("base/toggleMenu");
-      },
-    },
   },
 
   methods: {
@@ -92,7 +82,7 @@ export default {
     },
 
     onToggleMenu() {
-      this.$store.commit("base/toggleMenu");
+      this.menuOpen = !this.menuOpen;
     },
 
     onAbout() {
