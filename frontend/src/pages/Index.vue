@@ -1,5 +1,5 @@
 <template>
-  <q-page class="row full-height" @click="onFocus">
+  <q-page class="row full-height">
     <editor ref="editor" class="col" />
     <ProfilerDashboard v-if="profileModeOn" class="col-5" />
   </q-page>
@@ -21,12 +21,6 @@ export default {
 
   computed: {
     ...mapState("profiler", ["profileModeOn"]),
-  },
-
-  methods: {
-    onFocus(evt) {
-      this.$refs.editor.focus();
-    },
   },
 };
 </script>

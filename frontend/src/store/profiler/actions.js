@@ -28,15 +28,16 @@ export async function loadLevelLists({ state, commit, dispatch }, wordListName) 
   }
 }
 
-export function tokenizeContent({ rootState, commit }) {
+export function tokenizeContent({ rootGetters, commit }) {
   console.log("tokenizeContent");
   Loading.show()
-  api.post("/token", { content: rootState.editor.content }).then((response) => {
+  const text = rootGetters["editor/contentInnerText"];
+  api.post("/token", { content: text }).then((response) => {
     commit("setContentWords", response.data);
     commit("toggleProfileMode", true);
   });
 
-  api.post("/sentence", { content: rootState.editor.content }).then((response) => {
+  api.post("/sentence", { content: text }).then((response) => {
     commit("setContentSentences", response.data);
   });
 }

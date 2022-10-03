@@ -8,3 +8,7 @@ export function isChanged (state) {
         state.contentHTML !== cachedContentHTML
     )
 }
+
+export function contentInnerText(state) {
+    return state.content.replace(/<[^>]+>/g, "")
+}
