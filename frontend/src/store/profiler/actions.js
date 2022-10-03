@@ -13,6 +13,7 @@ function b64_to_utf8(str) {
   return decodeURIComponent(escape(window.atob(str)));
 }
 
+
 export async function loadLevelLists({ state, commit, dispatch }, wordListName) {
   console.log("loadLevelLists");
   Loading.show()
@@ -22,7 +23,8 @@ export async function loadLevelLists({ state, commit, dispatch }, wordListName) 
     if (levelList.url) {
       const response = await axios.get(levelList.url);
       const content = b64_to_utf8(response.data.content);
-      const words = content.split("\r\n");
+      const cleanedContent = content.replaceAll("\r", "");
+      const words = cleanedContent.split("\n");
       commit("setLevelListWords", { wordListName, words, levelIdx: i });
     }
   }
