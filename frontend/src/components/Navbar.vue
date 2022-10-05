@@ -10,23 +10,34 @@
       @click="$emit('toggleMenu')"
     />
 
-    <q-btn
-      v-show="profileModeOn"
-      flat
-      rouned
-      :title="$t('Editor')"
-      icon="text_fields"
-      @click="toggleToEditorMode"
-    />
+    <q-toolbar-title>
+      <q-avatar>
+        <img src="https://monlamit.com/assets/img/apple-touch-icon.png">
+      </q-avatar>
+      {{ $t("Monlam Children\'s Literary Review System")}}
+    </q-toolbar-title>
 
-    <q-btn
-      v-show="!profileModeOn"
-      flat
-      rouned
-      :title="$t('Analyze Text')"
-      icon="psychology"
-      @click="profile"
-    />
+
+    <q-page-sticky position="bottom-right" :offset="[50, 50]">
+      <q-btn
+        fab
+        v-show="profileModeOn"
+        :title="$t('Editor')"
+        icon="text_fields"
+        @click="toggleToEditorMode"
+        color="primary"
+      />
+
+      <q-btn
+        fab
+        v-show="!profileModeOn"
+        :title="$t('Analyze Text')"
+        icon="psychology"
+        @click="profile"
+        color="primary"
+      />
+
+    </q-page-sticky>
   </q-toolbar>
 </template>
 
