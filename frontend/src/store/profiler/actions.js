@@ -64,6 +64,11 @@ export function computeVocabStatistic({ state, commit, getters }, wordListName) 
 }
 
 function inLevelList(word, list) {
+  // skip punctuation
+  if (word.pos.length < 1) {
+    return false
+  }
+
   const lastChar = word.form.at(-1)
   if (lastChar === "་" || lastChar === "།") {
     const cleanedWord = word.form.slice(0, -1)
@@ -90,7 +95,7 @@ export async function profileContent({ state, commit}, wordListName) {
     });
 
     if (!isFound) {
-        commit("appendWordToContentWordsLevel", {...word, color: "black"})
+      commit("appendWordToContentWordsLevel", {...word, color: "black"})
     }
   }
 }
