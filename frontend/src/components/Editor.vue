@@ -2,7 +2,9 @@
   <div>
     <div v-show="!profileModeOn" class="editor">
       <q-editor
+        class="q-mt-lg"
         v-model="editor"
+        height="80vh"
         :placeholder="$t('Type or paste your text here')"
       />
     </div>
@@ -59,10 +61,14 @@ export default {
 }
 
 .profiledContent {
+  margin-top: 2rem;
   max-width: 1080px;
   margin-left: 100px;
   margin-right: 50px;
-  padding: 20px;
+  padding: 10px;
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
   font-size: 2rem;
   font-family: "Monlam Uni Ochan1";
 }
