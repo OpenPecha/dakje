@@ -1,18 +1,10 @@
 <template>
-  <q-layout view="lHh lpr lFf">
+  <q-layout view="hHh lpR fFf">
     <q-header class="bg-transparent">
       <Navbar @toggleMenu="onToggleMenu" />
     </q-header>
 
-    <q-drawer
-      v-model="menuOpen"
-      mini-to-overlay
-      bordered
-      :width="200"
-      :mini="menuMini"
-      @mouseover="menuMini = false"
-      @mouseout="menuMini = true"
-    >
+    <q-drawer v-model="menuOpen" side="left" overlay bordered>
       <Sidebar
         @about="onAbout"
         @newFile="onNewFile"
@@ -49,7 +41,6 @@ export default {
 
   data() {
     return {
-      menuMini: false,
       menuOpen: false,
     };
   },
