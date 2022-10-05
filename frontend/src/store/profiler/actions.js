@@ -34,13 +34,11 @@ export function tokenizeContent({ rootGetters, commit }) {
   console.log("tokenizeContent");
   Loading.show()
   const text = rootGetters["editor/contentInnerText"];
-  api.post("/token", { content: text }).then((response) => {
-    commit("setContentWords", response.data);
+  api.post("/tokenize", { content: text }).then((response) => {
+    console.log("tokenizeContent response", response.data);
+    commit("setContentWords", response.data.words);
+    commit("setContentSentences", response.data.sentences);
     commit("toggleProfileMode", true);
-  });
-
-  api.post("/sentence", { content: text }).then((response) => {
-    commit("setContentSentences", response.data);
   });
 }
 

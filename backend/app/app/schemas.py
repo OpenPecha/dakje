@@ -1,4 +1,5 @@
 from pydantic import BaseModel, validator
+from typing import List
 
 
 class Span(BaseModel):
@@ -22,7 +23,7 @@ class Text(BaseModel):
     content: str
 
 
-class Token(BaseModel):
+class WordToken(BaseModel):
     form: str
     pos: str
 
@@ -32,3 +33,7 @@ class Sentence(BaseModel):
     length: int
     verbs: int
     span: Span
+
+class WordAndSentenceTokens(BaseModel):
+    words: List[WordToken]
+    sentences: List[Sentence]

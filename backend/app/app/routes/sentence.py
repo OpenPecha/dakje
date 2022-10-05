@@ -78,7 +78,7 @@ def parse_sentence_token(sentence_token, text_content):
     return sentence
 
 def update_text_content(sentence, text_content):
-    """Once sentence is parse from text, it's content are replaced as 
+    """Once sentence is parse from text, it's content are replaced as
     $ so that we won't get confuse finding sentence span of repeated sentence later
 
     Args:
@@ -93,15 +93,28 @@ def update_text_content(sentence, text_content):
     text_content = re.sub(sentence_content, replacement_sentence, text_content, 1)
     return text_content
 
+def get_sentences(text_content, word_tokens) -> List[Sentence]:
+    """Return list of sentence object
+
+    Args:
+        text_content (str): text content
+
+    Returns:
+        list: list of sentence object
+    """
+    sentence_token_list = sentence_tokenizer(word_tokens)
+    sentences = []
+    for sentence_token in sentence_token_list:
+        sentence = parse_sentence_token(sentence_token, text_content)
+        text_content = update_text_content(sentence, text_content)
+        sentences.append(sentence)
+    return sentences
+
 @router.post("/sentence", response_model=List[Sentence])
 def sentence_segmentation(text: Text):
     sentences = []
     text_content = text.content
     word_tokenizer = WordTokenizer()
     tokens = word_tokenizer.tokenize(text_content)
-    sentence_tokens = sentence_tokenizer(tokens)
-    for sentence_token in sentence_tokens:
-        sentence = parse_sentence_token(sentence_token, text_content)
-        text_content = update_text_content(sentence, text_content)
-        sentences.append(sentence)
+    sentences = get_sentences(text_content, tokens)
     return sentences
