@@ -30,6 +30,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   border: 1px solid gray;
+  border-radius: 5px;
 
   & .coverage {
     display: flex;
