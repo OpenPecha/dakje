@@ -13,7 +13,7 @@
       </div>
 
       <div class="col">
-        <div>Levels</div>
+        <!-- <div>Levels</div>
         <div class="q-mt-xs q-gutter-xs">
           <q-btn
             v-for="level in selectedWordListLevels"
@@ -23,15 +23,15 @@
             unelevated
             dense
           />
-        </div>
+        </div> -->
       </div>
     </div>
 
     <ProfilerDashboardTokenCoverage class="q-mt-md" style="width: 60%" />
 
-    <ProfilerDashboardLevelsTable class="q-mt-md" style="width: 60%" />
+    <ProfilerDashboardLevelsTable class="q-mt-lg" style="width: 60%" />
 
-    <ProfilerDashboardSentenceStatistic class="q-mt-md" style="width: 60%" />
+    <ProfilerDashboardSentenceStatistic class="q-mt-lg" style="width: 60%" />
   </div>
 </template>
 

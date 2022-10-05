@@ -1,6 +1,6 @@
 <template>
   <q-toolbar :class="className">
-    <q-btn
+    <!-- <q-btn
       dense
       flat
       round
@@ -8,10 +8,10 @@
       aria-label="Menu"
       :title="$t('Toggle Menu')"
       @click="$emit('toggleMenu')"
-    />
+    /> -->
 
     <q-toolbar-title>
-      <q-avatar>
+      <q-avatar class="q-mr-md">
         <img src="https://monlamit.com/assets/img/apple-touch-icon.png">
       </q-avatar>
       {{ $t("Monlam Children\'s Literary Review System")}}
