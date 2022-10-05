@@ -22,7 +22,7 @@
             {{ col.name }}
           </td>
           <td style="text-align: right">{{ col.wordCount }}</td>
-          <td style="text-align: right">{{ col.percent }}</td>
+          <td style="text-align: right">{{ col.percent }}%</td>
         </tr>
       </tbody>
     </table>
