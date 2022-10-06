@@ -4,8 +4,21 @@
       <q-editor
         v-model="editor"
         class="q-mt-lg"
-        height="80vh"
+        max-height="80vh"
+        min-height="480px"
         :placeholder="$t('Type or paste your text here')"
+        :definitions="{
+          profile: {
+            label: $t('Profile'),
+            icon: 'psychology',
+            handler: profile,
+          },
+        }"
+        :toolbar="[
+          ['undo', 'redo'],
+          ['bold', 'italic', 'underline', 'strike'],
+          ['profile'],
+        ]"
       />
     </div>
 
@@ -46,6 +59,12 @@ export default {
   created() {
     this.$store.dispatch("profiler/setupWordLists");
   },
+
+  methods: {
+    profile() {
+      this.$store.dispatch("profiler/tokenizeContent");
+    },
+  }
 };
 </script>
 
