@@ -32,13 +32,19 @@ export class SentenceProfiler {
 
 
 const LevelColors = [
-    "maroon",
-    "green",
-    "navy",
-    "cornflowerblue",
-    "chocolate",
-    "dodgerblue"
+    "#b40606",
+    "#0aa50a",
+    "#067ee2",
+    "#b464ed",
+    "#e0c457",
+    "#342db4",
 ]
+
+export const unlistedColor = {
+    code : "#909090",
+    label : "Unlisted"
+}
+
 class LevelList {
     constructor(url, label, color) {
         this.url = url
@@ -75,7 +81,7 @@ class WordList {
       })
 
       // add unlisted level
-      const unListedLevel = new LevelList("", "Unlisted", "black")
+      const unListedLevel = new LevelList("", unlistedColor.label, unlistedColor.code)
       this.levelLists.push(unListedLevel)
     }
 }

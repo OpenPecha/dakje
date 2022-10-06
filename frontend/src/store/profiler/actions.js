@@ -1,6 +1,6 @@
 import { api, axios } from "boot/axios";
 import { Loading } from "quasar";
-import { WordLists } from "src/utils/textComplexity";
+import { unlistedColor, WordLists } from "src/utils/textComplexity";
 
 export async function setupWordLists({ commit, state }) {
   if (!state.wordLists) {
@@ -54,8 +54,8 @@ export function computeVocabStatistic({ state, commit, getters }, wordListName) 
     statistic.totalHit += level.count;
   });
   statistic.totalMiss = getters.totalWords - statistic.totalHit;
-  statistic.levels["Unlisted"].count = statistic.totalMiss,
-  statistic.levels["Unlisted"].percent = ((statistic.totalMiss / getters.totalWords) * 100).toFixed(1),
+  statistic.levels[unlistedColor.label].count = statistic.totalMiss,
+  statistic.levels[unlistedColor.label].percent = ((statistic.totalMiss / getters.totalWords) * 100).toFixed(1),
   commit("setVocabStatistic", statistic);
   console.log("computeVocabStatistic", state.vocabStatistic)
   Loading.hide()
@@ -93,7 +93,7 @@ export async function profileContent({ state, commit}, wordListName) {
     });
 
     if (!isFound) {
-      commit("appendWordToContentWordsLevel", {...word, color: "black"})
+      commit("appendWordToContentWordsLevel", {...word, color: unlistedColor.code })
     }
   }
 }
