@@ -1,5 +1,5 @@
 <template>
-  <q-toolbar :class="className">
+  <q-toolbar :class="className" class="q-py-md">
     <!-- <q-btn
       dense
       flat
@@ -10,15 +10,17 @@
       @click="$emit('toggleMenu')"
     /> -->
 
-    <q-toolbar-title>
+    <q-toolbar-title class="row text-primary">
       <q-avatar class="q-mr-md">
         <img src="https://monlamit.com/assets/img/apple-touch-icon.png">
       </q-avatar>
-      {{ $t("Monlam Children\'s Literary Review System")}}
+      <div   class="q-mt-xs">
+        {{ $t("Monlam Children\'s Literary Review System")}}
+      </div>
     </q-toolbar-title>
 
 
-    <q-page-sticky position="top-left" :offset="[20, 20]">
+    <q-page-sticky position="top-left" :offset="[20, 25]">
       <q-btn
         v-show="profileModeOn"
         fab

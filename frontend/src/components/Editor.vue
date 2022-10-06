@@ -80,7 +80,7 @@ export default {
 }
 
 .profiledContent {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   max-width: 1080px;
   margin-left: 100px;
   margin-right: 50px;
