@@ -20,21 +20,21 @@
 
     <q-page-sticky position="bottom-right" :offset="[50, 50]">
       <q-btn
-        fab
         v-show="profileModeOn"
+        fab
         :title="$t('Editor')"
         icon="text_fields"
-        @click="toggleToEditorMode"
         color="primary"
+        @click="toggleToEditorMode"
       />
 
       <q-btn
-        fab
         v-show="!profileModeOn"
+        fab
         :title="$t('Analyze Text')"
         icon="psychology"
-        @click="profile"
         color="primary"
+        @click="profile"
       />
 
     </q-page-sticky>

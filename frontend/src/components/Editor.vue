@@ -2,8 +2,8 @@
   <div>
     <div v-show="!profileModeOn" class="editor">
       <q-editor
-        class="q-mt-lg"
         v-model="editor"
+        class="q-mt-lg"
         height="80vh"
         :placeholder="$t('Type or paste your text here')"
       />
