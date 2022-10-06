@@ -18,25 +18,14 @@
     </q-toolbar-title>
 
 
-    <q-page-sticky position="bottom-right" :offset="[50, 50]">
+    <q-page-sticky position="top-left" :offset="[20, 20]">
       <q-btn
         v-show="profileModeOn"
         fab
-        :title="$t('Editor')"
-        icon="text_fields"
-        color="primary"
+        :title="$t('Go to Editor')"
+        icon="arrow_back"
         @click="toggleToEditorMode"
       />
-
-      <q-btn
-        v-show="!profileModeOn"
-        fab
-        :title="$t('Analyze Text')"
-        icon="psychology"
-        color="primary"
-        @click="profile"
-      />
-
     </q-page-sticky>
   </q-toolbar>
 </template>
@@ -58,9 +47,6 @@ export default {
   },
 
   methods: {
-    profile() {
-      this.$store.dispatch("profiler/tokenizeContent");
-    },
 
     toggleToEditorMode() {
       this.$store.commit("profiler/toggleProfileMode");
