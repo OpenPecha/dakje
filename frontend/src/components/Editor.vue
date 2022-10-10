@@ -3,12 +3,14 @@
     <div v-show="!profileModeOn" class="q-pa-sm editor">
       <q-editor
         v-model="editor"
+        dense
         max-height="80vh"
         min-height="480px"
         :placeholder="$t('Type or paste your text here')"
         :definitions="{
           profile: {
             label: $t('Profile'),
+            tip: 'profile the text',
             icon: 'psychology',
             handler: profile,
           },
