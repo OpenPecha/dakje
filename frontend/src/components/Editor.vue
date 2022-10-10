@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div v-show="!profileModeOn" class="editor">
+    <div v-show="!profileModeOn" class="q-pa-sm editor">
       <q-editor
         v-model="editor"
-        class="q-mt-lg"
         max-height="80vh"
         min-height="480px"
         :placeholder="$t('Type or paste your text here')"
