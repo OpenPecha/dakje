@@ -16,7 +16,6 @@
           },
         }"
         :toolbar="[
-          ['undo', 'redo'],
           ['bold', 'italic', 'underline', 'strike'],
           ['profile'],
         ]"
