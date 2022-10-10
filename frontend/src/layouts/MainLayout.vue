@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header class="bg-transparent">
-      <Navbar @toggleMenu="onToggleMenu" />
+      <Header @toggleMenu="onToggleMenu" />
     </q-header>
 
     <q-drawer v-model="menuOpen" side="left" overlay bordered>
@@ -28,14 +28,14 @@
 import { extractHTMLContent } from "src/utils/conversion";
 import { importFile } from "src/utils/loadfile";
 
-import Navbar from "components/Navbar.vue";
 import Sidebar from "components/Sidebar.vue";
+import Header from "src/components/Header.vue";
 
 export default {
   name: "MainLayout",
 
   components: {
-    Navbar,
+    Header,
     Sidebar,
   },
 

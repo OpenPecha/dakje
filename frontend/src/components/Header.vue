@@ -1,23 +1,13 @@
 <template>
-  <q-toolbar :class="className" class="q-py-md">
-    <!-- <q-btn
-      dense
-      flat
-      round
-      icon="menu"
-      aria-label="Menu"
-      :title="$t('Toggle Menu')"
-      @click="$emit('toggleMenu')"
-    /> -->
-
-    <q-toolbar-title class="row text-primary">
+  <div class="q-px-md q-py-sm">
+    <div class="flex no-wrap">
       <q-avatar class="q-mr-md">
         <img src="https://monlamit.com/assets/img/apple-touch-icon.png">
       </q-avatar>
-      <div   class="q-mt-xs">
-        {{ $t("Monlam Children\'s Literary Review System")}}
+      <div class="q-mt-xs">
+        <div class="text-h6 text-center text-primary"> {{ $t("Monlam Children\'s Literary Review System")}} </div>
       </div>
-    </q-toolbar-title>
+    </div>
 
 
     <q-page-sticky position="top-left" :offset="[20, 25]">
@@ -27,16 +17,17 @@
         :title="$t('Go to Editor')"
         icon="arrow_back"
         @click="toggleToEditorMode"
+
       />
     </q-page-sticky>
-  </q-toolbar>
+  </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 
 export default {
-  name: "Navbar",
+  name: "Header",
   emits: ["toggleMenu"],
 
   computed: {
