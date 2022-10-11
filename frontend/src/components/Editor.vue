@@ -22,7 +22,7 @@
       />
     </div>
 
-    <div v-show="profileModeOn" class="profiledContent">
+    <div v-show="profileModeOn" class="q-mx-auto q-mt-sm profiledContent">
       <Word v-for="(word, idx) in contentWordsLevel" :key="idx" :word="word" />
     </div>
   </div>
@@ -81,12 +81,12 @@ export default {
 
 .profiledContent {
   max-width: 1080px;
-  margin: auto;
-  max-height: 80vh;
-  padding: 1rem;
+  max-height: 75vh;
+  padding: 0.2rem 1rem;
+  border: 1px solid #ccc;
   overflow-y: auto;
   overflow-x: hidden;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-family: "Monlam Uni Ochan1";
 }
 

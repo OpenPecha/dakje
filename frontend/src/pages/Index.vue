@@ -1,5 +1,27 @@
 <template>
-  <q-page padding class="row full-height">
+  <q-page padding>
+    <div
+      v-show="profileModeOn"
+      class="q-mt-md q-mx-auto q-px-sm row justify-between"
+      style="max-width: 1080px;"
+    >
+      <q-btn
+        dense
+        flat
+        icon="arrow_back"
+        color="primary"
+        @click="toggleToEditorMode"
+      />
+
+      <q-btn
+        dense
+        no-caps
+        outline
+        :label="rightDrawerOpen ? $t('Hide Profile') : $t('Show Profile')"
+        color="primary"
+        @click="toggleRightDrawer"
+      />
+    </div>
     <editor ref="editor" class="col" />
   </q-page>
 </template>
@@ -18,6 +40,17 @@ export default {
 
   computed: {
     ...mapState("profiler", ["profileModeOn"]),
+    ...mapState("base", ["rightDrawerOpen"]),
   },
+
+  methods: {
+    toggleRightDrawer() {
+      this.$store.dispatch("base/toggleRightDrawer");
+    },
+
+    toggleToEditorMode() {
+      this.$store.commit("profiler/toggleProfileMode");
+    },
+  }
 };
 </script>
