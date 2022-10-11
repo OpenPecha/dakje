@@ -3,15 +3,15 @@
     <div v-show="!profileModeOn" class="q-pa-sm editor">
       <q-editor
         v-model="editor"
-        dense
         max-height="80vh"
         min-height="480px"
+        toolbar-push
         :placeholder="$t('Type or paste your text here')"
         :definitions="{
           profile: {
-            label: $t('Profile'),
-            tip: 'profile the text',
             icon: 'psychology',
+            label: 'Profile',
+            tip: $t('Profile the text'),
             handler: profile,
           },
         }"
@@ -22,7 +22,7 @@
       />
     </div>
 
-    <div v-show="profileModeOn" class="q-mx-auto q-mt-sm profiledContent">
+    <div v-show="profileModeOn" class="q-mx-auto q-mt-md profiledContent">
       <Word v-for="(word, idx) in contentWordsLevel" :key="idx" :word="word" />
     </div>
   </div>
@@ -81,7 +81,7 @@ export default {
 
 .profiledContent {
   max-width: 1080px;
-  max-height: 75vh;
+  max-height: 80vh;
   padding: 0.2rem 1rem;
   border: 1px solid #ccc;
   overflow-y: auto;
