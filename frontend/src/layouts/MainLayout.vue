@@ -4,24 +4,29 @@
     <q-header class="bg-transparent">
       <Header />
 
-      <q-btn
-        v-show="profileModeOn"
-        dense
-        flat
-        icon="arrow_back"
-        color="primary"
-        @click="toggleToEditorMode"
-      />
+      <div
+        class="row justify-between q-px-sm"
+        style="max-width: 1080px; margin: auto"
+      >
+        <q-btn
+          v-show="profileModeOn"
+          dense
+          flat
+          icon="arrow_back"
+          color="primary"
+          @click="toggleToEditorMode"
+        />
 
-      <q-btn
-        v-show="profileModeOn"
-        dense
-        flat
-        no-caps
-        label="Show Profile"
-        color="primary"
-        @click="toggleRightDrawer"
-      />
+        <q-btn
+          v-show="profileModeOn"
+          dense
+          flat
+          no-caps
+          label="Show Profile"
+          color="primary"
+          @click="toggleRightDrawer"
+        />
+      </div>
     </q-header>
 
     <q-drawer v-model="rightDrawerOpen" class="q-pa-md" side="right" overlay>

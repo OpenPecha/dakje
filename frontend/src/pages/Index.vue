@@ -1,5 +1,5 @@
 <template>
-  <q-page class="row full-height">
+  <q-page padding class="row full-height">
     <editor ref="editor" class="col" />
   </q-page>
 </template>
