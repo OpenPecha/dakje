@@ -1,7 +1,7 @@
 <template>
   <div v-if="vocabStatistic">
     <div class="row q-gutter-lg">
-      <div class="col-3">
+      <div class="col">
         <div>Word list:</div>
         <q-select
           v-model="selectedWordList"
@@ -12,8 +12,8 @@
         />
       </div>
 
-      <div class="col">
-        <!-- <div>Levels</div>
+      <!-- <div class="col">
+        <div>Levels</div>
         <div class="q-mt-xs q-gutter-xs">
           <q-btn
             v-for="level in selectedWordListLevels"
@@ -23,8 +23,8 @@
             unelevated
             dense
           />
-        </div> -->
-      </div>
+        </div>
+      </div> -->
     </div>
 
     <ProfilerDashboardTokenCoverage class="q-mt-md" style="width: 60%" />

@@ -24,9 +24,8 @@
       />
     </q-header>
 
-
-    <q-drawer v-model="rightDrawerOpen" side="right" overlay>
-      <!-- drawer content -->
+    <q-drawer v-model="rightDrawerOpen" class="q-pa-md" side="right" overlay>
+      <ProfilerDashboard v-if="profileModeOn" />
     </q-drawer>
 
     <q-page-container>
@@ -39,6 +38,7 @@
 <script>
 
 import Header from "components/Header.vue";
+import ProfilerDashboard from "components/ProfilerDashboard.vue";
 import { mapState } from "vuex";
 
 
@@ -47,12 +47,7 @@ export default {
 
   components: {
     Header,
-  },
-
-  data() {
-    return {
-      menuOpen: false,
-    };
+    ProfilerDashboard
   },
 
   computed: {

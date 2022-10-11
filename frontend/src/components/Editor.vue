@@ -80,12 +80,10 @@ export default {
 }
 
 .profiledContent {
-  margin-top: 0.5rem;
   max-width: 1080px;
-  margin-left: 100px;
-  margin-right: 50px;
-  padding: 10px;
-  max-height: 90vh;
+  margin: auto;
+  max-height: 80vh;
+  padding: 1rem;
   overflow-y: auto;
   overflow-x: hidden;
   font-size: 2rem;
