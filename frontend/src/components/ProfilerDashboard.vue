@@ -27,11 +27,11 @@
       </div> -->
     </div>
 
-    <ProfilerDashboardTokenCoverage class="q-mt-md" style="width: 60%" />
+    <ProfilerDashboardTokenCoverage class="q-mt-md" />
 
-    <ProfilerDashboardLevelsTable class="q-mt-lg" style="width: 60%" />
+    <ProfilerDashboardLevelsTable class="q-mt-lg" />
 
-    <ProfilerDashboardSentenceStatistic class="q-mt-lg" style="width: 60%" />
+    <ProfilerDashboardSentenceStatistic class="q-mt-lg" />
   </div>
 </template>
 
