@@ -2,7 +2,7 @@
   <q-page padding>
     <div
       v-show="profileModeOn"
-      class="q-mx-auto q-px-sm row justify-between"
+      class="q-mx-auto row justify-between"
       style="max-width: 1080px;"
     >
       <q-btn
