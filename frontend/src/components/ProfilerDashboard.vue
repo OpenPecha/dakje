@@ -1,8 +1,8 @@
 <template>
   <div v-if="vocabStatistic">
     <div class="row q-gutter-lg">
-      <div class="col">
-        <div>Word list:</div>
+      <div>
+        <div class="text-h6">Word List</div>
         <q-select
           v-model="selectedWordList"
           class="q-mt-sm"
