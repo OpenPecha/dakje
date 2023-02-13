@@ -8,7 +8,7 @@
       </div>
       <div>
         <span class="text-weight-light">ཚིག་གྲུབ་ཀྱི་ཆ་སྙོམས་རིང་ཚད།:</span>
-        {{ avgSentenceLength }} ཚིག།
+        {{ avgSentenceLength }} ཚིག
       </div>
     </div>
   </div>

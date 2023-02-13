@@ -2,7 +2,7 @@
   <div v-if="vocabStatistic">
     <div class="row q-gutter-lg">
       <div>
-        <div class="text-h6">ཐ་སྙད་རེའུ་མིག།</div>
+        <div class="text-h6">ཐ་སྙད་རེའུ་མིག</div>
         <q-select
           v-model="selectedWordList"
           class="q-mt-sm"

@@ -4,7 +4,7 @@
       <thead>
         <tr>
           <th style="text-align: left">ཚད་གཞི།</th>
-          <th style="text-align: right">ཐ་སྙད་ཨང་།</th>
+          <th style="text-align: right">ཚིག་གྲངས།</th>
           <th style="text-align: right">བརྒྱ་ཆ།</th>
         </tr>
       </thead>
