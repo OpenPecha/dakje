@@ -1,5 +1,5 @@
 # develop stage
-FROM node:14.14.0-alpine as develop-stage
+FROM node:14.16.0-alpine as develop-stage
 
 WORKDIR /app
 COPY package*.json ./
