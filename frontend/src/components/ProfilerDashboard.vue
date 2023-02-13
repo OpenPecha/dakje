@@ -2,7 +2,7 @@
   <div v-if="vocabStatistic">
     <div class="row q-gutter-lg">
       <div>
-        <div class="text-h6">Word List</div>
+        <div class="text-h6">ཐ་སྙད་རེའུ་མིག།</div>
         <q-select
           v-model="selectedWordList"
           class="q-mt-sm"
@@ -13,7 +13,7 @@
       </div>
 
       <!-- <div class="col">
-        <div>Levels</div>
+        <div>ཚད་གཞི།</div>
         <div class="q-mt-xs q-gutter-xs">
           <q-btn
             v-for="level in selectedWordListLevels"

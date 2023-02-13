@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="text-h6">Sentences</div>
+    <div class="text-h6">ཚིག་གྲུབ།</div>
     <div>
       <div>
-        <span class="text-weight-light">Number of sentences:</span>
+        <span class="text-weight-light">ཚིག་གྲུབ་གྲངས།:</span>
         {{ totalNumSentences }}
       </div>
       <div>
-        <span class="text-weight-light">Average sentence length:</span>
-        {{ avgSentenceLength }} words
+        <span class="text-weight-light">ཚིག་གྲུབ་ཀྱི་ཆ་སྙོམས་རིང་ཚད།:</span>
+        {{ avgSentenceLength }} ཚིག།
       </div>
     </div>
   </div>

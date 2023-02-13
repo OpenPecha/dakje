@@ -3,9 +3,9 @@
     <table class="profileTable">
       <thead>
         <tr>
-          <th style="text-align: left">Levels</th>
-          <th style="text-align: right">No. of Words</th>
-          <th style="text-align: right">Percent</th>
+          <th style="text-align: left">ཚད་གཞི།</th>
+          <th style="text-align: right">ཐ་སྙད་ཨང་།</th>
+          <th style="text-align: right">བརྒྱ་ཆ།</th>
         </tr>
       </thead>
       <tbody>

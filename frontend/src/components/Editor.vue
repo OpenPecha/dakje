@@ -6,11 +6,11 @@
         max-height="80vh"
         min-height="480px"
         toolbar-push
-        :placeholder="$t('Type or paste your text here')"
+        :placeholder="$t('འདིར་ཡི་གེ་འཇུག་རོགས་གནང་།')"
         :definitions="{
           profile: {
             icon: 'psychology',
-            label: 'Profile',
+            label: 'ཞིབ་འཇུག།',
             tip: $t('Profile the text'),
             handler: profile,
           },
