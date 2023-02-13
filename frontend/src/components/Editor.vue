@@ -10,7 +10,7 @@
         :definitions="{
           profile: {
             icon: 'psychology',
-            label: 'ཞིབ་འཇུག།',
+            label: 'ཞིབ་འཇུག',
             tip: $t('ཡིག་ཆ་ཞིབ་འཇུག་གྱིས།'),
             handler: profile,
           },
@@ -80,7 +80,7 @@ export default {
 }
 
 .editor .q-btn__content{
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .profiledContent {
