@@ -17,7 +17,7 @@
         dense
         no-caps
         outline
-        :label="rightDrawerOpen ? $t('Hide Profile') : $t('ཞིབ་བཤེར་གྲུབ་དོན།')"
+        :label="rightDrawerOpen ? $t('གྲུབ་དོན་སྦེད་པ།') : $t('ཞིབ་བཤེར་གྲུབ་དོན།')"
         color="primary"
         @click="toggleRightDrawer"
       />

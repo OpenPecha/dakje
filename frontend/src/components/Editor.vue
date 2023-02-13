@@ -11,9 +11,8 @@
           profile: {
             icon: 'psychology',
             label: 'ཞིབ་འཇུག།',
-            tip: $t('Profile the text'),
+            tip: $t('ཡིག་ཆ་ཞིབ་འཇུག་གྱིས།'),
             handler: profile,
-            font: '22px'
           },
         }"
         :toolbar="[
@@ -78,6 +77,10 @@ export default {
   line-height: 1.7;
   overflow: auto;
   font-family: "Monlam Uni Ochan1";
+}
+
+.editor .q-btn__content{
+  font-size: 15px;
 }
 
 .profiledContent {
