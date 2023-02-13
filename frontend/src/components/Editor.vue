@@ -13,6 +13,7 @@
             label: 'ཞིབ་འཇུག།',
             tip: $t('Profile the text'),
             handler: profile,
+            font: '22px'
           },
         }"
         :toolbar="[
