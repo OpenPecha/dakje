@@ -42,7 +42,7 @@ const LevelColors = [
 
 export const unlistedColor = {
     code : "#909090",
-    label : "Unlisted"
+    label : "མ་ཚུད་པ།"
 }
 
 class LevelList {

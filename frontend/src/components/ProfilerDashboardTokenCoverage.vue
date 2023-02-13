@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="text-h6">Token Coverage</div>
+    <div class="text-h6">གྲུབ་དོན་རྒྱུ་ཆ།</div>
     <div class="container">
       <div class="coverage" :style="{ width: `${totalHitPercent}%` }">
         {{ totalHitPercent + "%" }}
