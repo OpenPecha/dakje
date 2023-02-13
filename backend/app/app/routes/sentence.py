@@ -114,7 +114,7 @@ def get_sentences(text_content, word_tokens) -> List[Sentence]:
 def sentence_segmentation(text: Text):
     sentences = []
     text_content = text.content
-    word_tokenizer = WordTokenizer()
+    word_tokenizer = WordTokenizer(build_trie=True)
     tokens = word_tokenizer.tokenize(text_content)
     sentences = get_sentences(text_content, tokens)
     return sentences
