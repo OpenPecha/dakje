@@ -5,7 +5,7 @@
         <img src="https://monlamit.com/assets/img/apple-touch-icon.png">
       </q-avatar>
       <div class="q-mt-xs">
-        <div class="text-h6 text-center text-primary"> {{ $t("Monlam Children\'s Literary Review System")}} </div>
+        <div class="text-h6 text-center text-primary"> {{ $t("སྨོན་ལམ་ཐ་སྙད་ཚད་གཞི་བརྟག་ཆས།")}} </div>
       </div>
     </div>
   </div>
