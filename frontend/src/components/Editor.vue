@@ -80,7 +80,7 @@ export default {
 }
 
 .editor .q-btn__content{
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .profiledContent {
