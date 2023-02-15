@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style lang="scss">
-.q-drawer-container >aside{
-  top:130px;
+.q-drawer-container > aside{
+  top:130px !important;
 }
 </style>
