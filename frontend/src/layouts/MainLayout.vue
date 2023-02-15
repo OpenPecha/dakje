@@ -6,7 +6,7 @@
     </q-header>
 
 
-    <q-drawer v-model="rightDrawerOpen" class="q-pa-md" side="right" overlay>
+    <q-drawer v-model="rightDrawerOpen" class="q-pa-md" side="right" overlay >
       <ProfilerDashboard v-if="profileModeOn" />
     </q-drawer>
 
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+
 
 import Header from "components/Header.vue";
 import ProfilerDashboard from "components/ProfilerDashboard.vue";
@@ -45,3 +46,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.q-drawer-container >aside{
+  top:130px;
+}
+</style>
