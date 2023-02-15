@@ -6,6 +6,7 @@
         max-height="80vh"
         min-height="480px"
         toolbar-push
+        
         :placeholder="$t('འདིར་ཡི་གེ་འཇུག་རོགས་གནང་།')"
         :definitions="{
           profile: {
@@ -16,7 +17,6 @@
           },
         }"
         :toolbar="[
-          ['bold', 'italic', 'underline', 'strike'],
           ['profile'],
         ]"
       />
